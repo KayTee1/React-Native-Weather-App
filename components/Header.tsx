@@ -1,13 +1,13 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
-import getTime from '../util/getTime';
+import { getFormattedTime } from '../util/getTime';
 
 type HeaderProps = {
   iconCode: string;
 };
 
 export default function Header({ iconCode }: HeaderProps) {
-  const formattedDate = getTime();
+  const formattedDate = getFormattedTime();
   const uri = `http://openweathermap.org/img/wn/${iconCode}.png`;
   return (
     <View style={styles.header}>

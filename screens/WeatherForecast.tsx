@@ -6,7 +6,7 @@ import Header from '../components/Header';
 import WeatherDetails from '../components/WeatherDetails';
 import Forecasts, { ForecastWeatherData } from '../components/Forecasts';
 
-type DescriptionProps = {
+export type DescriptionProps = {
   id: number;
   main: string;
   description: string;
