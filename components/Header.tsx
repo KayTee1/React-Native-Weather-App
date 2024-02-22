@@ -2,7 +2,11 @@ import React from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
 import getTime from '../util/getTime';
 
-export default function Header({ uri }) {
+type HeaderProps = {
+  uri: string;
+};
+
+export default function Header({ uri }: HeaderProps) {
   const formattedDate = getTime();
   return (
     <View style={styles.header}>
