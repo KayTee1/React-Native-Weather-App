@@ -13,17 +13,16 @@ type DetailsProps = {
 
 type WeatherDetailsProps = {
   weather: DescriptionProps[];
-  details: DetailsProps;
+  main: DetailsProps;
   name: string;
 };
 
 export default function WeatherDetails({
   weather,
-  details,
+  main,
   name,
 }: WeatherDetailsProps) {
-  const { main } = weather[0];
-  const { temp, feels_like } = details;
+  const { temp, feels_like } = main;
   return (
     <View style={styles.main_container}>
       <View style={styles.temp_container}>
@@ -34,7 +33,7 @@ export default function WeatherDetails({
       <View style={styles.description}>
         <Text style={styles.text}>Feels like {feels_like.toFixed(1)}</Text>
         <Text style={styles.ball_char}> ⬤ </Text>
-        <Text style={styles.text}>{main}</Text>
+        <Text style={styles.text}>{weather[0].main}</Text>
       </View>
     </View>
   );

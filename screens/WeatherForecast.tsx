@@ -4,15 +4,20 @@ import getWeatherData from '../util/getWeatherData';
 
 import Header from '../components/Header';
 import WeatherDetails from '../components/WeatherDetails';
-import Forecasts from '../components/Forecasts';
+import Forecasts, { ForecastWeatherData } from '../components/Forecasts';
+
 type DescriptionProps = {
   id: number;
   main: string;
   description: string;
   icon: string;
 };
+type WeatherDataMainProps = {
+  temp: number;
+  feels_like: number;
+};
 type WeatherData = {
-  main: any;
+  main: WeatherDataMainProps;
   weather: DescriptionProps[];
   name: string;
 };
@@ -21,7 +26,7 @@ const WeatherForecast = () => {
   const [currentWeatherData, setCurrentWeatherData] =
     useState<WeatherData | null>(null);
   const [forecastWeatherData, setForecastWeatherData] =
-    useState<WeatherData | null>(null);
+    useState<ForecastWeatherData>({} as ForecastWeatherData);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -44,13 +49,13 @@ const WeatherForecast = () => {
   }
 
   const { main, weather, name } = currentWeatherData;
-  const icon = weather[0].icon;
+
   return (
     <View style={styles.container}>
-      <Header uri={`https://openweathermap.org/img/wn/${icon}.png`} />
+      <Header iconCode={weather[0].icon} />
       <WeatherDetails
         weather={weather}
-        details={main}
+        main={main}
         name={name}
       />
       <Forecasts forecastWeatherData={forecastWeatherData} />

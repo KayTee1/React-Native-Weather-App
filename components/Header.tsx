@@ -3,11 +3,12 @@ import { StyleSheet, Text, View, Image } from 'react-native';
 import getTime from '../util/getTime';
 
 type HeaderProps = {
-  uri: string;
+  iconCode: string;
 };
 
-export default function Header({ uri }: HeaderProps) {
+export default function Header({ iconCode }: HeaderProps) {
   const formattedDate = getTime();
+  const uri = `http://openweathermap.org/img/wn/${iconCode}.png`;
   return (
     <View style={styles.header}>
       <Image
@@ -26,6 +27,7 @@ export default function Header({ uri }: HeaderProps) {
 
 const styles = StyleSheet.create({
   header: {
+    marginTop: 30,
     flexDirection: 'row',
     alignItems: 'center',
   },
