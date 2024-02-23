@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
 import { getFormattedTime } from '../util/getTime';
+import WeatherIcon from './WeatherIcon';
 
 type HeaderProps = {
   iconCode: string;
@@ -8,15 +9,9 @@ type HeaderProps = {
 
 export default function Header({ iconCode }: HeaderProps) {
   const formattedDate = getFormattedTime();
-  const uri = `http://openweathermap.org/img/wn/${iconCode}.png`;
   return (
     <View style={styles.header}>
-      <Image
-        style={styles.icon}
-        source={{
-          uri: uri,
-        }}
-      />
+      <WeatherIcon iconCode={iconCode} size="lg"/>
       <View>
         <Text style={styles.text}>Today</Text>
         <Text style={styles.time}>{formattedDate}</Text>
@@ -30,11 +25,6 @@ const styles = StyleSheet.create({
     marginTop: 30,
     flexDirection: 'row',
     alignItems: 'center',
-  },
-  icon: {
-    width: 80,
-    height: 80,
-    marginRight: 10,
   },
   text: {
     fontSize: 34,

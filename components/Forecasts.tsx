@@ -1,9 +1,7 @@
-import { StyleSheet, Text, View } from 'react-native';
-
-import DescriptionProps from './WeatherDetails';
-import WeatherDataMainProps from './WeatherDetails';
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, View } from 'react-native';
 import ForecastCard from './ForecastCard';
-import { useState } from 'react';
+import { getRawDate } from '../util/getTime';
 
 type WeatherDataMainProps = {
   temp: number;
@@ -34,25 +32,33 @@ export default function Forecasts({
 }: {
   forecastWeatherData: ForecastWeatherDataProps;
 }) {
-  console.log(forecastWeatherData.list);
-  const [forecastData, setForecastData] = useState([]); // state for 4 days of forecast data
-  /*
-  forecastWeatherData.list.forEach(element => {
-    console.log(element.dt_txt);
+  const [forecastData, setForecastData] = useState<
+    ForecastWeatherDataDetails[]
+  >([]);
 
+  useEffect(() => {
+    if (!forecastWeatherData.list.length) return;
 
-    //setForecastData([...forecastData, element]);
-  });
-  */
-  forecastWeatherData.list.map((forecastListItem) => {
-    //console.log(forecastListItem.dt_txt);
-    const uniqueDates = forecastListItem.dt_txt.split(' ')[0];
-    console.log(uniqueDates);
-  });
+    const filteredData = forecastWeatherData.list.filter((forecastListItem) =>
+      forecastListItem.dt_txt.includes('12:00:00')
+    );
+
+    if (!filteredData[0].dt_txt.includes(getRawDate())) {
+      const todayForecastIndex = forecastWeatherData.list.findIndex(
+        (forecastListItem) => forecastListItem.dt_txt.includes(getRawDate())
+      );
+
+      if (todayForecastIndex !== -1) {
+        filteredData.unshift(forecastWeatherData.list[todayForecastIndex]);
+      }
+    }
+
+    setForecastData(filteredData);
+  }, [forecastWeatherData]);
 
   return (
     <View style={styles.container}>
-      {forecastWeatherData.list.map((forecastListItem) => (
+      {forecastData.map((forecastListItem) => (
         <ForecastCard
           key={forecastListItem.dt}
           forecastListItem={forecastListItem}
@@ -64,14 +70,11 @@ export default function Forecasts({
 
 const styles = StyleSheet.create({
   container: {
+    padding: 15,
     marginTop: 50,
     flex: 1,
     flexDirection: 'row',
     overflow: 'scroll',
     maxWidth: '100%',
-  },
-  text: {
-    fontSize: 20,
-    color: '#fff',
   },
 });

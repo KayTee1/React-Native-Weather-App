@@ -1,6 +1,7 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Platform } from 'react-native';
 import { DescriptionProps } from '../screens/WeatherForecast';
 import { getWeekDay } from '../util/getTime';
+import WeatherIcon from './WeatherIcon';
 
 type WeatherDataMainProps = {
   temp: number;
@@ -18,14 +19,21 @@ export default function ForecastCard({
 }: {
   forecastListItem: ForecastListItemProps;
 }) {
+  console.log(forecastListItem);
   const { dt } = forecastListItem;
-
+  const { temp, feels_like } = forecastListItem.main;
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>{getWeekDay(dt)}</Text>
+      <Text style={styles.weekDayText}>{getWeekDay(dt)}</Text>
+      <WeatherIcon
+        iconCode={forecastListItem.weather[0].icon}
+        size="sm"
+      />
+      <Text style={styles.tempText}>{feels_like.toFixed(1)} °C</Text>
     </View>
   );
 }
+
 const styles = StyleSheet.create({
   container: {
     borderRadius: 5,
@@ -34,9 +42,18 @@ const styles = StyleSheet.create({
     height: 150,
     width: 100,
     margin: 8,
+    alignItems: 'center',
   },
-  text: {
+  weekDayText: {
     fontSize: 20,
     color: '#fff',
+    marginTop: 10,
+    marginBottom: 15,
+  },
+  tempText: {
+    fontSize: 18,
+    color: '#fff',
+    marginTop: 10,
+    marginBottom: 15,
   },
 });
