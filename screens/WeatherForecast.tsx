@@ -4,7 +4,7 @@ import getWeatherData from '../util/getWeatherData';
 
 import Header from '../components/Header';
 import WeatherDetails from '../components/WeatherDetails';
-import Forecasts, { ForecastWeatherData } from '../components/Forecasts';
+import Forecasts, { ForecastWeatherDataProps } from '../components/Forecasts';
 
 export type DescriptionProps = {
   id: number;
@@ -26,7 +26,7 @@ const WeatherForecast = () => {
   const [currentWeatherData, setCurrentWeatherData] =
     useState<WeatherData | null>(null);
   const [forecastWeatherData, setForecastWeatherData] =
-    useState<ForecastWeatherData>({} as ForecastWeatherData);
+    useState<ForecastWeatherDataProps>({} as ForecastWeatherDataProps);
 
   useEffect(() => {
     const fetchData = async () => {

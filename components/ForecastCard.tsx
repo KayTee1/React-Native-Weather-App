@@ -7,9 +7,10 @@ type WeatherDataMainProps = {
   feels_like: number;
 };
 type ForecastListItemProps = {
-  dt: number;
   main: WeatherDataMainProps;
   weather: DescriptionProps[];
+  dt: number;
+  dt_txt: string;
 };
 
 export default function ForecastCard({

@@ -26,7 +26,5 @@ export const getFormattedTime = () => {
 
 export const getWeekDay = (dt: number) => {
   const date = new Date(dt * 1000);
-  console.log('Unix timestamp:', dt);
-  console.log('Day of the week index:', date.getDay());
   return weekdays[date.getDay()];
 };
