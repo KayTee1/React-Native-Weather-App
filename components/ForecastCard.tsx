@@ -1,7 +1,15 @@
-import { StyleSheet, Text, View, Platform } from 'react-native';
+import React, { useState } from 'react';
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableWithoutFeedback,
+  ViewStyle,
+} from 'react-native';
 import { DescriptionProps } from '../screens/WeatherForecast';
 import { getWeekDay } from '../util/getTime';
 import WeatherIcon from './WeatherIcon';
+import { useNavigation } from '@react-navigation/native';
 
 type WeatherDataMainProps = {
   temp: number;
@@ -19,18 +27,27 @@ export default function ForecastCard({
 }: {
   forecastListItem: ForecastListItemProps;
 }) {
-  console.log(forecastListItem);
+  const navigation = useNavigation();
+
+  const handleNavigate = () => {
+    console.log('Mouse Enter');
+    navigation.navigate('Forecast');
+  };
+
   const { dt } = forecastListItem;
   const { temp, feels_like } = forecastListItem.main;
+
   return (
-    <View style={styles.container}>
-      <Text style={styles.weekDayText}>{getWeekDay(dt)}</Text>
-      <WeatherIcon
-        iconCode={forecastListItem.weather[0].icon}
-        size="sm"
-      />
-      <Text style={styles.tempText}>{feels_like.toFixed(1)} °C</Text>
-    </View>
+    <TouchableWithoutFeedback onPress={handleNavigate}>
+      <View style={styles.container}>
+        <Text style={styles.weekDayText}>{getWeekDay(dt)}</Text>
+        <WeatherIcon
+          iconCode={forecastListItem.weather[0].icon}
+          size="sm"
+        />
+        <Text style={styles.tempText}>{feels_like.toFixed(1)} °C</Text>
+      </View>
+    </TouchableWithoutFeedback>
   );
 }
 
@@ -44,6 +61,9 @@ const styles = StyleSheet.create({
     margin: 8,
     alignItems: 'center',
   },
+  containerHovered: {
+    backgroundColor: 'red',
+  } as ViewStyle,
   weekDayText: {
     fontSize: 20,
     color: '#fff',

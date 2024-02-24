@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
-import ForecastCard from './ForecastCard';
 import { getRawDate } from '../util/getTime';
+
+import ForecastCard from './ForecastCard';
+
 
 type WeatherDataMainProps = {
   temp: number;
@@ -32,6 +34,7 @@ export default function Forecasts({
 }: {
   forecastWeatherData: ForecastWeatherDataProps;
 }) {
+
   const [forecastData, setForecastData] = useState<
     ForecastWeatherDataDetails[]
   >([]);

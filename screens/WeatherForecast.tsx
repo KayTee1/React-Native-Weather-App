@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, View } from 'react-native';
+
 import getWeatherData from '../util/getWeatherData';
 
 import Header from '../components/Header';
