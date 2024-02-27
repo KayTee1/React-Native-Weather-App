@@ -8,6 +8,8 @@ type HeaderProps = {
 };
 
 export default function Header({ iconCode }: HeaderProps) {
+  // TODO: Get the current time and format it from screen
+  // make this reuseable by passing more stuff in
   const formattedDate = getFormattedTime();
   return (
     <View style={styles.header}>

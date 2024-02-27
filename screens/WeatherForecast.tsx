@@ -4,8 +4,11 @@ import { StyleSheet, View } from 'react-native';
 import getWeatherData from '../util/getWeatherData';
 
 import Header from '../components/Header';
-import WeatherDetails from '../components/WeatherDetails';
-import Forecasts, { ForecastWeatherDataProps } from '../components/Forecasts';
+import WeatherDetails from '../Sections/WeatherDetails';
+import ForecastCarousel, {
+  ForecastWeatherDataProps,
+} from '../Sections/ForecastsCarousel';
+import Precipitation from '../Sections/PrecipitationSection';
 
 export type DescriptionProps = {
   id: number;
@@ -53,13 +56,15 @@ const WeatherForecast = () => {
 
   return (
     <View style={styles.container}>
+      {/* need to pass more stuff in header and weatherDetails */}
       <Header iconCode={weather[0].icon} />
       <WeatherDetails
         weather={weather}
         main={main}
         name={name}
       />
-      <Forecasts forecastWeatherData={forecastWeatherData} />
+      <ForecastCarousel forecastWeatherData={forecastWeatherData} />
+      <Precipitation forecastWeatherData={forecastWeatherData} />
     </View>
   );
 };

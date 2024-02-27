@@ -30,8 +30,9 @@ export default function ForecastCard({
   const navigation = useNavigation();
 
   const handleNavigate = () => {
-    console.log('Mouse Enter');
-    navigation.navigate('Forecast');
+    navigation.navigate('Forecast', {
+      data: forecastListItem,
+    });
   };
 
   const { dt } = forecastListItem;

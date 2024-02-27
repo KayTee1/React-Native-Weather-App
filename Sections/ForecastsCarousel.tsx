@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { getRawDate } from '../util/getTime';
 
-import ForecastCard from './ForecastCard';
-
+import ForecastCard from '../components/ForecastCard';
 
 type WeatherDataMainProps = {
   temp: number;
@@ -20,6 +19,8 @@ type ForecastWeatherDataDetails = {
   weather: DescriptionProps[];
   dt: number;
   dt_txt: string;
+  snow?: number;
+  rain?: number;
 };
 
 export type ForecastWeatherDataProps = {
@@ -29,12 +30,11 @@ export type ForecastWeatherDataProps = {
   list: ForecastWeatherDataDetails[];
 };
 
-export default function Forecasts({
+export default function ForecastsCarousel({
   forecastWeatherData,
 }: {
   forecastWeatherData: ForecastWeatherDataProps;
 }) {
-
   const [forecastData, setForecastData] = useState<
     ForecastWeatherDataDetails[]
   >([]);
