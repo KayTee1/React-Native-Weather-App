@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, View } from 'react-native';
+
 import getWeatherData from '../util/getWeatherData';
 
 import Header from '../components/Header';
-import WeatherDetails from '../components/WeatherDetails';
-import Forecasts, { ForecastWeatherData } from '../components/Forecasts';
+import WeatherDetails from '../Sections/WeatherDetails';
+import ForecastCarousel, {
+  ForecastWeatherDataProps,
+} from '../Sections/ForecastsCarousel';
+import Precipitation from '../Sections/PrecipitationSection';
 
-type DescriptionProps = {
+export type DescriptionProps = {
   id: number;
   main: string;
   description: string;
@@ -26,7 +30,7 @@ const WeatherForecast = () => {
   const [currentWeatherData, setCurrentWeatherData] =
     useState<WeatherData | null>(null);
   const [forecastWeatherData, setForecastWeatherData] =
-    useState<ForecastWeatherData>({} as ForecastWeatherData);
+    useState<ForecastWeatherDataProps>({} as ForecastWeatherDataProps);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -52,13 +56,15 @@ const WeatherForecast = () => {
 
   return (
     <View style={styles.container}>
+      {/* need to pass more stuff in header and weatherDetails */}
       <Header iconCode={weather[0].icon} />
       <WeatherDetails
         weather={weather}
         main={main}
         name={name}
       />
-      <Forecasts forecastWeatherData={forecastWeatherData} />
+      <ForecastCarousel forecastWeatherData={forecastWeatherData} />
+      <Precipitation forecastWeatherData={forecastWeatherData} />
     </View>
   );
 };
