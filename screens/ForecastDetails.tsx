@@ -6,12 +6,12 @@ import Header from '../components/Header';
 export default function ForecastDetails() {
   const navigation = useNavigation();
   const route = useRoute();
-  const { data }:any = route.params;
+  const { data }: any = route.params;
   console.log(data);
   return (
     <View style={styles.container}>
       {/*reusing the header component with others aswell*/}
-      <Header weather={data.weather} />
+
       <Button
         title="Go back"
         onPress={() => navigation.goBack()}
