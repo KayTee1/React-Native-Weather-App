@@ -59,6 +59,9 @@ export default function ForecastsCarousel({
     setForecastData(filteredData);
   }, [forecastWeatherData]);
 
+  //TODO Instead of only passing every 8th forecast pass all but display only 1
+  // 1 combined? average? or just the 12:00 forecast
+
   return (
     <View style={styles.container}>
       {forecastData.map((forecastListItem) => (
