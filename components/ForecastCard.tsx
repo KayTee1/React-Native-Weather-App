@@ -9,7 +9,9 @@ import {
 import { DescriptionProps } from '../screens/WeatherForecast';
 import { getWeekDay } from '../util/getTime';
 import WeatherIcon from './WeatherIcon';
+import { StackNavigationProp } from '@react-navigation/stack';
 import { useNavigation } from '@react-navigation/native';
+import { DayForecasts } from '../Sections/ForecastsCarousel';
 
 type WeatherDataMainProps = {
   temp: number;
@@ -21,32 +23,36 @@ type ForecastListItemProps = {
   dt: number;
   dt_txt: string;
 };
+type RootStackParamList = {
+  Forecast: {
+    data: DayForecasts;
+  };
+};
+
+type navigationProp = StackNavigationProp<RootStackParamList, 'Forecast'>;
 
 export default function ForecastCard({
-  forecastListItem,
+  dayForecast,
 }: {
-  forecastListItem: ForecastListItemProps;
+  dayForecast: DayForecasts;
 }) {
-  const navigation = useNavigation();
+  console.log(dayForecast);
+
+  const navigation = useNavigation<navigationProp>();
 
   const handleNavigate = () => {
     navigation.navigate('Forecast', {
-      data: forecastListItem,
+      data: dayForecast,
     });
   };
-
-  const { dt } = forecastListItem;
-  const { temp, feels_like } = forecastListItem.main;
+  //TODO: choose which of time of the day to display for the data
 
   return (
     <TouchableWithoutFeedback onPress={handleNavigate}>
       <View style={styles.container}>
-        <Text style={styles.weekDayText}>{getWeekDay(dt)}</Text>
-        <WeatherIcon
-          iconCode={forecastListItem.weather[0].icon}
-          size="sm"
-        />
-        <Text style={styles.tempText}>{feels_like.toFixed(1)} °C</Text>
+        <Text style={styles.weekDayText}>hi</Text>
+
+        <Text style={styles.tempText}> °C</Text>
       </View>
     </TouchableWithoutFeedback>
   );

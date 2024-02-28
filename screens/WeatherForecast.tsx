@@ -57,7 +57,7 @@ const WeatherForecast = () => {
   return (
     <View style={styles.container}>
       {/* need to pass more stuff in header and weatherDetails */}
-      <Header iconCode={weather[0].icon} />
+      <Header weather={weather} />
       <WeatherDetails
         weather={weather}
         main={main}

@@ -29,6 +29,7 @@ export const getWeekDay = (dt: number) => {
   return weekdays[date.getDay()];
 };
 
+//returns todays date e.g 2024-02-26 string
 export const getRawDate = () => {
   const date = new Date();
   const year = date.getFullYear();
@@ -37,3 +38,9 @@ export const getRawDate = () => {
 
   return `${year}-${month}-${day}`;
 };
+
+//returns todays date e.g 26 int
+export const getToday = () => {
+  const date = new Date();
+  return date.getDate();
+}
