@@ -13,17 +13,18 @@ const months = [
   'Nov',
   'Dec',
 ];
-
-export const getFormattedTime = () => {
-  const date = new Date();
+//returns formatted time e.g thu, 26 feb
+export const getFormattedTime = (dt: number) => {
+  const date = new Date(dt * 1000);
   const weekday = weekdays[date.getDay()];
   const day = date.getDate();
   const month = months[date.getMonth()];
 
-  const formattedDate = `${weekday}, ${day} ${month}`;
+  const formattedDate = `${weekday}, ${day}. ${month}`;
   return formattedDate;
 };
 
+//returns the day of the week e.g Mon
 export const getWeekDay = (dt: number) => {
   const date = new Date(dt * 1000);
   return weekdays[date.getDay()];
@@ -43,4 +44,4 @@ export const getRawDate = () => {
 export const getToday = () => {
   const date = new Date();
   return date.getDate();
-}
+};

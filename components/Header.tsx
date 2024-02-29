@@ -6,12 +6,13 @@ import { DescriptionProps } from '../screens/WeatherForecast';
 
 type HeaderProps = {
   weather: DescriptionProps[];
+  dt: number;
 };
 
-export default function Header({ weather }: HeaderProps) {
+export default function Header({ weather, dt }: HeaderProps) {
   // TODO: Get the current time and format it from screen
   // make this reuseable by passing more stuff in
-  const formattedDate = getFormattedTime();
+  const formattedDate = getFormattedTime(dt);
 
   const { icon } = weather[0];
   return (

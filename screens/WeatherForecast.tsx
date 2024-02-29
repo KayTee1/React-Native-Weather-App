@@ -9,6 +9,7 @@ import ForecastCarousel, {
   ForecastWeatherDataProps,
 } from '../Sections/ForecastsCarousel';
 import Precipitation from '../Sections/PrecipitationSection';
+import { LinearGradient } from 'expo-linear-gradient';
 
 export type DescriptionProps = {
   id: number;
@@ -24,6 +25,7 @@ type WeatherData = {
   main: WeatherDataMainProps;
   weather: DescriptionProps[];
   name: string;
+  dt: number;
 };
 
 const WeatherForecast = () => {
@@ -52,12 +54,17 @@ const WeatherForecast = () => {
     return null;
   }
 
-  const { main, weather, name } = currentWeatherData;
+  const { main, weather, name, dt } = currentWeatherData;
 
   return (
-    <View style={styles.container}>
+    <LinearGradient
+      colors={['rgba(0,0,0,0.8)', 'transparent']}
+      style={styles.container}>
       {/* need to pass more stuff in header and weatherDetails */}
-      <Header weather={weather} />
+      <Header
+        weather={weather}
+        dt={dt}
+      />
       <WeatherDetails
         weather={weather}
         main={main}
@@ -65,7 +72,7 @@ const WeatherForecast = () => {
       />
       <ForecastCarousel forecastWeatherData={forecastWeatherData} />
       <Precipitation forecastWeatherData={forecastWeatherData} />
-    </View>
+    </LinearGradient>
   );
 };
 
@@ -76,6 +83,11 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
+    elevation: 4, // Shadow effect for Android
+    shadowColor: '#000', // Shadow effect for iOS
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.23,
+    shadowRadius: 2.62,
   },
 });
 

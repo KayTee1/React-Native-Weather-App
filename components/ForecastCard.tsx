@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   StyleSheet,
   Text,
@@ -36,8 +36,6 @@ export default function ForecastCard({
 }: {
   dayForecast: DayForecasts;
 }) {
-  console.log(dayForecast);
-
   const navigation = useNavigation<navigationProp>();
 
   const handleNavigate = () => {
@@ -45,14 +43,38 @@ export default function ForecastCard({
       data: dayForecast,
     });
   };
-  //TODO: choose which of time of the day to display for the data
+  const [displayedData, setDisplayedData] = useState({
+    weekDay: '',
+    averageTemp: 0,
+    weatherIcon: '',
+  });
+
+  useEffect(() => {
+    const length = dayForecast.forecasts.length;
+    const avgTemp =
+      dayForecast.forecasts.reduce(
+        (acc, forecast) => acc + forecast.main.temp,
+        0
+      ) / length;
+    const randomIndex = Math.floor(Math.random() * length);
+    setDisplayedData({
+      weekDay: getWeekDay(dayForecast.forecasts[randomIndex].dt),
+      averageTemp: avgTemp,
+      weatherIcon: dayForecast.forecasts[randomIndex].weather[0].icon,
+    });
+  }, []);
 
   return (
     <TouchableWithoutFeedback onPress={handleNavigate}>
       <View style={styles.container}>
-        <Text style={styles.weekDayText}>hi</Text>
-
-        <Text style={styles.tempText}> °C</Text>
+        <Text style={styles.weekDayText}>{displayedData.weekDay}</Text>
+        <WeatherIcon
+          iconCode={displayedData.weatherIcon}
+          size="sm"
+        />
+        <Text style={styles.tempText}>
+          {displayedData.averageTemp.toFixed(1)} °C
+        </Text>
       </View>
     </TouchableWithoutFeedback>
   );
