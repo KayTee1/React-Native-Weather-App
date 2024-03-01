@@ -1,35 +1,21 @@
 import { useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 
-import ForecastCard from '../components/ForecastCard';
+import {
+  WeatherData,
+} from '../types/Types';
 
-type WeatherDataMainProps = {
-  temp: number;
-  feels_like: number;
-};
-type DescriptionProps = {
-  id: number;
-  main: string;
-  description: string;
-  icon: string;
-};
-export type ForecastWeatherDataDetails = {
-  main: WeatherDataMainProps;
-  weather: DescriptionProps[];
-  wind: { speed: number };
-  dt: number;
-  dt_txt: string;
-};
+import ForecastCard from '../components/ForecastCard';
 
 export type ForecastWeatherDataProps = {
   cod: string;
   message: number;
   cnt: number;
-  list: ForecastWeatherDataDetails[];
+  list: WeatherData[];
 };
-export type DayForecasts = {
+type DayForecasts = {
   date: string;
-  forecasts: ForecastWeatherDataDetails[];
+  forecasts: WeatherData[];
 };
 
 export default function ForecastsCarousel({
@@ -42,7 +28,7 @@ export default function ForecastsCarousel({
   useEffect(() => {
     if (!forecastWeatherData.list.length) return;
 
-    const forecastsByDate: { [key: string]: ForecastWeatherDataDetails[] } = {};
+    const forecastsByDate: { [key: string]: WeatherData[] } = {};
 
     forecastWeatherData.list.forEach((forecastListItem) => {
       const date = forecastListItem.dt_txt.split(' ')[0];

@@ -5,8 +5,12 @@ import { useNavigation } from '@react-navigation/native';
 
 import WeatherIcon from './WeatherIcon';
 import { getWeekDay } from '../util/getTime';
+import { WeatherData } from '../types/Types';
 
-import { DayForecasts } from '../Sections/ForecastsCarousel';
+type DayForecasts = {
+  date: string;
+  forecasts: WeatherData[];
+};
 
 type RootStackParamList = {
   Forecast: {
@@ -14,13 +18,13 @@ type RootStackParamList = {
   };
 };
 
-type navigationProp = StackNavigationProp<RootStackParamList, 'Forecast'>;
-
 type displayDataProps = {
   weekDay: string;
   averageTemp: number;
   weatherIcon: string;
 };
+
+type navigationProp = StackNavigationProp<RootStackParamList, 'Forecast'>;
 
 export default function ForecastCard({
   dayForecast,

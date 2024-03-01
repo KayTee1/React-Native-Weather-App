@@ -1,20 +1,9 @@
 import { StyleSheet, Text, View } from 'react-native';
-
-type DescriptionProps = {
-  id: number;
-  main: string;
-  description: string;
-  icon: string;
-};
-
-type DetailsProps = {
-  temp: number;
-  feels_like: number;
-};
+import { DescriptionProps, WeatherDataMainProps } from '../types/Types';
 
 type WeatherDetailsProps = {
   weather: DescriptionProps[];
-  main: DetailsProps;
+  main: WeatherDataMainProps;
   name: string;
 };
 

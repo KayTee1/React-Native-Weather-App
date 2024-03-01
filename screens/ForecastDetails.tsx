@@ -3,13 +3,13 @@ import { useNavigation, useRoute } from '@react-navigation/native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { StackNavigationProp } from '@react-navigation/stack';
 
-import { ForecastWeatherDataDetails } from '../Sections/ForecastsCarousel';
 import RenderItem from '../components/RenderItem';
 import { getFormattedTime } from '../util/getTime';
+import { WeatherData } from '../types/Types';
 
 type RootStackParamList = {
   data: {
-    forecasts: ForecastWeatherDataDetails[];
+    forecasts: WeatherData[];
   };
 };
 
@@ -33,7 +33,7 @@ export default function ForecastDetails() {
 
       <View style={styles.forecastsContainer}>
         {data.forecasts.map(
-          (forecast: ForecastWeatherDataDetails, index: number) => (
+          (forecast: WeatherData, index: number) => (
             <RenderItem
               key={index}
               forecast={forecast}

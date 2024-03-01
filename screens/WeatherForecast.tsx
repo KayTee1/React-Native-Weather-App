@@ -2,32 +2,21 @@ import { useState, useEffect } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 
+import {
+  DescriptionProps,
+  WeatherData,
+  WeatherDataMainProps,
+} from '../types/Types';
 import getWeatherData from '../util/getWeatherData';
 
 import WeatherDetails from '../Sections/WeatherDetails';
+
 import ForecastCarousel, {
   ForecastWeatherDataProps,
 } from '../Sections/ForecastsCarousel';
 
 import Header from '../components/Header';
 import LocationInput from '../components/LocationInput';
-
-export type DescriptionProps = {
-  id: number;
-  main: string;
-  description: string;
-  icon: string;
-};
-type WeatherDataMainProps = {
-  temp: number;
-  feels_like: number;
-};
-type WeatherData = {
-  main: WeatherDataMainProps;
-  weather: DescriptionProps[];
-  name: string;
-  dt: number;
-};
 
 const WeatherForecast = () => {
   //state for location input

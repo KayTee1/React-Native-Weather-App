@@ -1,11 +1,11 @@
 import { StyleSheet, Text, View } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 
-import { ForecastWeatherDataDetails } from '../Sections/ForecastsCarousel';
 import WeatherIcon from './WeatherIcon';
+import { WeatherData } from '../types/Types';
 
 type RenderItemProps = {
-  forecast: ForecastWeatherDataDetails;
+  forecast: WeatherData;
 };
 
 export default function RenderItem({ forecast }: RenderItemProps) {

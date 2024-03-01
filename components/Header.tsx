@@ -1,8 +1,8 @@
 import { StyleSheet, Text, View } from 'react-native';
 
-import { DescriptionProps } from '../screens/WeatherForecast';
 import { getFormattedTime } from '../util/getTime';
 import WeatherIcon from './WeatherIcon';
+import { DescriptionProps } from '../types/Types';
 
 type HeaderProps = {
   weather: DescriptionProps[];
