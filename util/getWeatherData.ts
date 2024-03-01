@@ -2,9 +2,9 @@ import { APIKEY } from '../secrets.js';
 
 type Option = 'current' | 'forecast';
 
-export default function GetWeatherData(option: Option) {
+export default function GetWeatherData(option: Option, text: string) {
   const fetchWeatherData = async (option: Option) => {
-    const location = 'Tampere';
+    const location = text || 'Tampere'; //default location
     const forecastCount = 40;
     const current_url = `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${APIKEY}&units=metric`;
     const forecast_url = `https://api.openweathermap.org/data/2.5/forecast?q=${location}&appid=${APIKEY}&units=metric&cnt=${forecastCount}`;

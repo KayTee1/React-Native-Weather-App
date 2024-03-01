@@ -1,5 +1,5 @@
 import { useNavigation, useRoute } from '@react-navigation/native';
-import { Button, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Button, Pressable, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import React from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
 
@@ -60,11 +60,11 @@ export default function ForecastDetails() {
           />
         ))}
       </View>
-      <TouchableOpacity
+      <Pressable
         style={styles.button}
         onPress={() => navigation.goBack()}>
         <Text style={styles.buttonText}>Go back</Text>
-      </TouchableOpacity>
+      </Pressable>
     </LinearGradient>
   );
 }

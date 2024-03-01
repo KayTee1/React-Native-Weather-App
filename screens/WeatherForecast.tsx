@@ -8,7 +8,7 @@ import WeatherDetails from '../Sections/WeatherDetails';
 import ForecastCarousel, {
   ForecastWeatherDataProps,
 } from '../Sections/ForecastsCarousel';
-import Precipitation from '../Sections/PrecipitationSection';
+import LocationInput from '../components/LocationInput';
 import { LinearGradient } from 'expo-linear-gradient';
 
 export type DescriptionProps = {
@@ -29,24 +29,27 @@ type WeatherData = {
 };
 
 const WeatherForecast = () => {
+  //state for input
+  const [text, onChangeText] = useState<string>('');
+
   const [currentWeatherData, setCurrentWeatherData] =
     useState<WeatherData | null>(null);
   const [forecastWeatherData, setForecastWeatherData] =
     useState<ForecastWeatherDataProps>({} as ForecastWeatherDataProps);
 
+  const fetchData = async () => {
+    onChangeText('');
+    try {
+      const currentData = await getWeatherData('current', text);
+      const forecastData = await getWeatherData('forecast', text);
+      setCurrentWeatherData(currentData);
+      setForecastWeatherData(forecastData);
+    } catch (error) {
+      console.error('Error fetching weather data:', error);
+      throw error;
+    }
+  };
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const currentData = await getWeatherData('current');
-        const forecastData = await getWeatherData('forecast');
-        setCurrentWeatherData(currentData);
-        setForecastWeatherData(forecastData);
-      } catch (error) {
-        console.error('Error fetching weather data:', error);
-        throw error;
-      }
-    };
-
     fetchData();
   }, []);
 
@@ -71,7 +74,11 @@ const WeatherForecast = () => {
         name={name}
       />
       <ForecastCarousel forecastWeatherData={forecastWeatherData} />
-      <Precipitation forecastWeatherData={forecastWeatherData} />
+      <LocationInput
+        text={text}
+        onChangeText={onChangeText}
+        fetchData={fetchData}
+      />
     </LinearGradient>
   );
 };
@@ -83,11 +90,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-    elevation: 4, // Shadow effect for Android
-    shadowColor: '#000', // Shadow effect for iOS
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.23,
-    shadowRadius: 2.62,
+    elevation: 4,
   },
 });
 

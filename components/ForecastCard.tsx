@@ -1,11 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {
-  StyleSheet,
-  Text,
-  View,
-  TouchableWithoutFeedback,
-  ViewStyle,
-} from 'react-native';
+import { StyleSheet, Text, View, ViewStyle, Pressable } from 'react-native';
 import { DescriptionProps } from '../screens/WeatherForecast';
 import { getWeekDay } from '../util/getTime';
 import WeatherIcon from './WeatherIcon';
@@ -65,18 +59,18 @@ export default function ForecastCard({
   }, []);
 
   return (
-    <TouchableWithoutFeedback onPress={handleNavigate}>
-      <View style={styles.container}>
-        <Text style={styles.weekDayText}>{displayedData.weekDay}</Text>
-        <WeatherIcon
-          iconCode={displayedData.weatherIcon}
-          size="sm"
-        />
-        <Text style={styles.tempText}>
-          {displayedData.averageTemp.toFixed(1)} °C
-        </Text>
-      </View>
-    </TouchableWithoutFeedback>
+    <Pressable
+      onPress={handleNavigate}
+      style={styles.container}>
+      <Text style={styles.weekDayText}>{displayedData.weekDay}</Text>
+      <WeatherIcon
+        iconCode={displayedData.weatherIcon}
+        size="sm"
+      />
+      <Text style={styles.tempText}>
+        {displayedData.averageTemp.toFixed(1)} °C
+      </Text>
+    </Pressable>
   );
 }
 
@@ -86,6 +80,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#fff',
     height: 150,
+    maxHeight: 150,
     width: 100,
     margin: 8,
     alignItems: 'center',

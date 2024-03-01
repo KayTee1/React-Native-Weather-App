@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { getRawDate, getToday } from '../util/getTime';
 
 import ForecastCard from '../components/ForecastCard';
 
@@ -83,5 +82,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     overflow: 'scroll',
     maxWidth: '100%',
+    maxHeight: 200,
   },
 });
