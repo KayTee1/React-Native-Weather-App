@@ -1,6 +1,6 @@
-import React, { useState, useRef } from 'react';
-import { View, StyleSheet, TextInput, Animated, Pressable } from 'react-native';
-import Icon from 'react-native-vector-icons/EvilIcons';
+import React, { useState, useRef } from "react";
+import { View, StyleSheet, TextInput, Animated, Pressable } from "react-native";
+import Icon from "react-native-vector-icons/EvilIcons";
 
 type LocationInputProps = {
   text: string;
@@ -28,11 +28,7 @@ export default function LocationInput({
   return (
     <View style={styles.container}>
       <Pressable onPress={toggleInput}>
-        <Icon
-          name="location"
-          size={24}
-          color="black"
-        />
+        <Icon name="location" size={24} color="black" />
       </Pressable>
       <Animated.View style={{ width: inputWidth }}>
         <TextInput
@@ -40,14 +36,11 @@ export default function LocationInput({
           onChangeText={onChangeText}
           value={text}
           placeholder="Enter location"
+          onSubmitEditing={fetchData}
         />
       </Animated.View>
       <Pressable onPress={fetchData}>
-        <Icon
-          name="check"
-          size={24}
-          color="black"
-        />
+        <Icon name="check" size={24} color="black" />
       </Pressable>
     </View>
   );
@@ -55,9 +48,9 @@ export default function LocationInput({
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: 'white',
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "white",
     borderRadius: 10,
     marginTop: 5,
     height: 40,
@@ -67,7 +60,7 @@ const styles = StyleSheet.create({
     height: 40,
     borderWidth: 1,
     paddingHorizontal: 10,
-    backgroundColor: 'white',
+    backgroundColor: "white",
     borderRadius: 10,
   },
 });

@@ -1,11 +1,10 @@
-import { useEffect, useState } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { FlatList } from "react-native-gesture-handler";
+import { useEffect, useState } from "react";
+import { StyleSheet, View } from "react-native";
 
-import {
-  WeatherData,
-} from '../types/Types';
+import { WeatherData } from "../types/Types";
 
-import ForecastCard from '../components/ForecastCard';
+import ForecastCard from "../components/ForecastCard";
 
 export type ForecastWeatherDataProps = {
   cod: string;
@@ -26,12 +25,17 @@ export default function ForecastsCarousel({
   const [forecastData, setForecastData] = useState<DayForecasts[]>([]);
 
   useEffect(() => {
-    if (!forecastWeatherData.list.length) return;
+    if (
+      !forecastWeatherData ||
+      !forecastWeatherData.list ||
+      !forecastWeatherData.list.length
+    )
+      return;
 
     const forecastsByDate: { [key: string]: WeatherData[] } = {};
 
     forecastWeatherData.list.forEach((forecastListItem) => {
-      const date = forecastListItem.dt_txt.split(' ')[0];
+      const date = forecastListItem.dt_txt.split(" ")[0];
       if (!forecastsByDate[date]) {
         forecastsByDate[date] = [];
       }
@@ -50,12 +54,12 @@ export default function ForecastsCarousel({
 
   return (
     <View style={styles.container}>
-      {forecastData.map((dayForecast, index) => (
-        <ForecastCard
-          key={index}
-          dayForecast={dayForecast}
-        />
-      ))}
+      <FlatList
+        data={forecastData}
+        renderItem={({ item }) => <ForecastCard dayForecast={item} />}
+        keyExtractor={(item) => item.date}
+        horizontal
+      />
     </View>
   );
 }
@@ -65,9 +69,9 @@ const styles = StyleSheet.create({
     padding: 15,
     marginTop: 50,
     flex: 1,
-    flexDirection: 'row',
-    overflow: 'scroll',
-    maxWidth: '100%',
+    flexDirection: "row",
+    overflow: "scroll",
+    maxWidth: "100%",
     maxHeight: 200,
   },
 });

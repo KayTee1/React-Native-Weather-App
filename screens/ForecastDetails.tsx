@@ -1,11 +1,12 @@
-import { Pressable, StyleSheet, Text, View } from 'react-native';
-import { useNavigation, useRoute } from '@react-navigation/native';
-import { LinearGradient } from 'expo-linear-gradient';
-import { StackNavigationProp } from '@react-navigation/stack';
+import { Pressable, StyleSheet, Text, View } from "react-native";
+import { useNavigation, useRoute } from "@react-navigation/native";
+import { LinearGradient } from "expo-linear-gradient";
+import { StackNavigationProp } from "@react-navigation/stack";
 
-import RenderItem from '../components/RenderItem';
-import { getFormattedTime } from '../util/getTime';
-import { WeatherData } from '../types/Types';
+import RenderItem from "../components/RenderItem";
+import { getFormattedTime } from "../util/getTime";
+import { WeatherData } from "../types/Types";
+import { FlatList } from "react-native-gesture-handler";
 
 type RootStackParamList = {
   data: {
@@ -13,7 +14,7 @@ type RootStackParamList = {
   };
 };
 
-type navigationProp = StackNavigationProp<RootStackParamList, 'data'>;
+type navigationProp = StackNavigationProp<RootStackParamList, "data">;
 
 export default function ForecastDetails() {
   const navigation = useNavigation<navigationProp>();
@@ -22,8 +23,9 @@ export default function ForecastDetails() {
 
   return (
     <LinearGradient
-      colors={['rgba(0,0,0,0.8)', 'transparent']}
-      style={styles.container}>
+      colors={["rgba(0,0,0,0.8)", "transparent"]}
+      style={styles.container}
+    >
       <View style={styles.header}>
         <Text style={styles.text}>Tampere, </Text>
         <Text style={styles.text}>
@@ -32,18 +34,13 @@ export default function ForecastDetails() {
       </View>
 
       <View style={styles.forecastsContainer}>
-        {data.forecasts.map(
-          (forecast: WeatherData, index: number) => (
-            <RenderItem
-              key={index}
-              forecast={forecast}
-            />
-          )
-        )}
+        <FlatList
+          data={data.forecasts}
+          renderItem={({ item }) => <RenderItem forecast={item} />}
+          keyExtractor={(item) => item.dt.toString()}
+        />
       </View>
-      <Pressable
-        style={styles.button}
-        onPress={() => navigation.goBack()}>
+      <Pressable style={styles.button} onPress={() => navigation.goBack()}>
         <Text style={styles.buttonText}>Go back</Text>
       </Pressable>
     </LinearGradient>
@@ -53,41 +50,41 @@ export default function ForecastDetails() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#222441',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    flexDirection: 'column',
+    backgroundColor: "#222441",
+    justifyContent: "space-between",
+    alignItems: "center",
+    flexDirection: "column",
   },
   header: {
-    flexDirection: 'row',
-    backgroundColor: 'white',
+    flexDirection: "row",
+    backgroundColor: "white",
     padding: 10,
     borderRadius: 10,
     minWidth: 300,
     minHeight: 60,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     marginTop: 30,
   },
   forecastsContainer: {
-    flexDirection: 'column',
-    maxHeight: 500,
-    overflow: 'scroll',
+    flexDirection: "column",
+    height: "65%",
+    overflow: "scroll",
   },
   text: {
-    color: 'black',
+    color: "black",
     fontSize: 20,
   },
   button: {
     marginBottom: 30,
-    backgroundColor: 'white',
+    backgroundColor: "white",
     padding: 10,
     borderRadius: 10,
     minWidth: 300,
   },
   buttonText: {
-    textAlign: 'center',
+    textAlign: "center",
     fontSize: 20,
-    color: 'black',
+    color: "black",
   },
 });
