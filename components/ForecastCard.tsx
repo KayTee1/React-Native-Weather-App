@@ -56,7 +56,7 @@ export default function ForecastCard({
       averageTemp: avgTemp,
       weatherIcon: dayForecast.forecasts[randomIndex].weather[0].icon,
     });
-  }, []);
+  }, [dayForecast]);
 
   return (
     <Pressable

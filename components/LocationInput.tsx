@@ -1,5 +1,6 @@
-import { Pressable, SafeAreaView, StyleSheet, TextInput } from 'react-native';
-import Icon from 'react-native-vector-icons/AntDesign';
+import React, { useState, useRef } from 'react';
+import { View, StyleSheet, TextInput, Animated, Pressable } from 'react-native';
+import Icon from 'react-native-vector-icons/EvilIcons';
 
 type LocationInputProps = {
   text: string;
@@ -12,40 +13,60 @@ export default function LocationInput({
   onChangeText,
   fetchData,
 }: LocationInputProps) {
+  const [inputVisible, setInputVisible] = useState(false);
+  const inputWidth = useRef(new Animated.Value(0)).current;
+
+  const toggleInput = () => {
+    setInputVisible(!inputVisible);
+    Animated.timing(inputWidth, {
+      toValue: inputVisible ? 0 : 250,
+      duration: 300,
+      useNativeDriver: false,
+    }).start();
+  };
+
   return (
-    <SafeAreaView style={styles.container}>
-      <TextInput
-        style={styles.input}
-        onChangeText={onChangeText}
-        value={text}
-      />
-      <Icon.Button
-        name="search1"
-        backgroundColor=""
-        onPress={fetchData}
-        color="black"></Icon.Button>
-    </SafeAreaView>
+    <View style={styles.container}>
+      <Pressable onPress={toggleInput}>
+        <Icon
+          name="location"
+          size={24}
+          color="black"
+        />
+      </Pressable>
+      <Animated.View style={{ width: inputWidth }}>
+        <TextInput
+          style={styles.input}
+          onChangeText={onChangeText}
+          value={text}
+          placeholder="Enter location"
+        />
+      </Animated.View>
+      <Pressable onPress={fetchData}>
+        <Icon
+          name="check"
+          size={24}
+          color="black"
+        />
+      </Pressable>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  btn_text: {
-    fontSize: 20,
-    textAlign: 'center',
-  },
   container: {
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: 'white',
     borderRadius: 10,
     marginTop: 5,
+    height: 40,
   },
   input: {
+    flex: 1,
     height: 40,
-    width: 250,
-    margin: 12,
     borderWidth: 1,
-    padding: 10,
+    paddingHorizontal: 10,
     backgroundColor: 'white',
     borderRadius: 10,
   },

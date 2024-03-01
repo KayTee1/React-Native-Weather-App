@@ -1,5 +1,12 @@
 import { useNavigation, useRoute } from '@react-navigation/native';
-import { Button, Pressable, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import {
+  Button,
+  Pressable,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import React from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
 
@@ -75,6 +82,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#222441',
     justifyContent: 'space-between',
     alignItems: 'center',
+    flexDirection: 'column',
   },
   header: {
     flexDirection: 'row',

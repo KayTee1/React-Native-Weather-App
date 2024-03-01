@@ -63,7 +63,6 @@ const WeatherForecast = () => {
     <LinearGradient
       colors={['rgba(0,0,0,0.8)', 'transparent']}
       style={styles.container}>
-      {/* need to pass more stuff in header and weatherDetails */}
       <Header
         weather={weather}
         dt={dt}
@@ -74,11 +73,13 @@ const WeatherForecast = () => {
         name={name}
       />
       <ForecastCarousel forecastWeatherData={forecastWeatherData} />
-      <LocationInput
-        text={text}
-        onChangeText={onChangeText}
-        fetchData={fetchData}
-      />
+      <View style={{ }}>
+        <LocationInput
+          text={text}
+          onChangeText={onChangeText}
+          fetchData={fetchData}
+        />
+      </View>
     </LinearGradient>
   );
 };
