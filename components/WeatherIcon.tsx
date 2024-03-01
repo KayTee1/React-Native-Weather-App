@@ -1,8 +1,10 @@
 import { Image, StyleSheet } from 'react-native';
+
 type WeatherIconProps = {
   iconCode: string;
   size: 'sm' | 'lg';
 };
+
 export default function WeatherIcon({ iconCode, size }: WeatherIconProps) {
   const uri = `http://openweathermap.org/img/wn/${iconCode}.png`;
   return (

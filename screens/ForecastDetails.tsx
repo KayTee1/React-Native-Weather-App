@@ -1,53 +1,25 @@
+import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
-import {
-  Button,
-  Pressable,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
-import React from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
+import { StackNavigationProp } from '@react-navigation/stack';
 
+import { ForecastWeatherDataDetails } from '../Sections/ForecastsCarousel';
 import RenderItem from '../components/RenderItem';
 import { getFormattedTime } from '../util/getTime';
+
+type RootStackParamList = {
+  data: {
+    forecasts: ForecastWeatherDataDetails[];
+  };
+};
+
+type navigationProp = StackNavigationProp<RootStackParamList, 'data'>;
+
 export default function ForecastDetails() {
-  const navigation = useNavigation();
+  const navigation = useNavigation<navigationProp>();
   const route = useRoute();
-  const { data }: any = route.params;
-  //for testing purposes
-  /*
-  const data = [
-    {
-      dt: 1631781600,
-      main: {
-        temp: 11.1,
-        feels_like: 10.1,
-        temp_min: 11.1,
-        temp_max: 11.1,
-        pressure: 1014,
-        sea_level: 1014,
-        grnd_level: 1008,
-        humidity: 67,
-        temp_kf: 0,
-      },
-      weather: [
-        {
-          id: 800,
-          main: 'Clear',
-          description: 'clear sky',
-          icon: '01d',
-        },
-      ],
-      wind: {
-        speed: 2.39,
-        deg: 272,
-        gust: 2.73,
-      },
-    },
-  ];
-*/
+  const { data }: RootStackParamList = route.params as RootStackParamList;
+
   return (
     <LinearGradient
       colors={['rgba(0,0,0,0.8)', 'transparent']}
@@ -60,12 +32,14 @@ export default function ForecastDetails() {
       </View>
 
       <View style={styles.forecastsContainer}>
-        {data.forecasts.map((forecast: any, index: number) => (
-          <RenderItem
-            key={index}
-            forecast={forecast}
-          />
-        ))}
+        {data.forecasts.map(
+          (forecast: ForecastWeatherDataDetails, index: number) => (
+            <RenderItem
+              key={index}
+              forecast={forecast}
+            />
+          )
+        )}
       </View>
       <Pressable
         style={styles.button}

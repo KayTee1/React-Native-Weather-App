@@ -1,22 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, ViewStyle, Pressable } from 'react-native';
-import { DescriptionProps } from '../screens/WeatherForecast';
-import { getWeekDay } from '../util/getTime';
-import WeatherIcon from './WeatherIcon';
+import { StyleSheet, Text, Pressable } from 'react-native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { useNavigation } from '@react-navigation/native';
+
+import WeatherIcon from './WeatherIcon';
+import { getWeekDay } from '../util/getTime';
+
 import { DayForecasts } from '../Sections/ForecastsCarousel';
 
-type WeatherDataMainProps = {
-  temp: number;
-  feels_like: number;
-};
-type ForecastListItemProps = {
-  main: WeatherDataMainProps;
-  weather: DescriptionProps[];
-  dt: number;
-  dt_txt: string;
-};
 type RootStackParamList = {
   Forecast: {
     data: DayForecasts;
@@ -24,6 +15,12 @@ type RootStackParamList = {
 };
 
 type navigationProp = StackNavigationProp<RootStackParamList, 'Forecast'>;
+
+type displayDataProps = {
+  weekDay: string;
+  averageTemp: number;
+  weatherIcon: string;
+};
 
 export default function ForecastCard({
   dayForecast,
@@ -37,7 +34,7 @@ export default function ForecastCard({
       data: dayForecast,
     });
   };
-  const [displayedData, setDisplayedData] = useState({
+  const [displayedData, setDisplayedData] = useState<displayDataProps>({
     weekDay: '',
     averageTemp: 0,
     weatherIcon: '',
@@ -45,11 +42,13 @@ export default function ForecastCard({
 
   useEffect(() => {
     const length = dayForecast.forecasts.length;
+    // Calculate average temperature for the day
     const avgTemp =
       dayForecast.forecasts.reduce(
         (acc, forecast) => acc + forecast.main.temp,
         0
       ) / length;
+    // randomIndex is used to get a random icon for the day
     const randomIndex = Math.floor(Math.random() * length);
     setDisplayedData({
       weekDay: getWeekDay(dayForecast.forecasts[randomIndex].dt),
@@ -85,9 +84,6 @@ const styles = StyleSheet.create({
     margin: 8,
     alignItems: 'center',
   },
-  containerHovered: {
-    backgroundColor: 'red',
-  } as ViewStyle,
   weekDayText: {
     fontSize: 20,
     color: '#fff',

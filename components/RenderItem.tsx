@@ -1,16 +1,22 @@
 import { StyleSheet, Text, View } from 'react-native';
-import WeatherIcon from './WeatherIcon';
 import { LinearGradient } from 'expo-linear-gradient';
 
-export default function RenderItem({ forecast }: any) {
+import { ForecastWeatherDataDetails } from '../Sections/ForecastsCarousel';
+import WeatherIcon from './WeatherIcon';
+
+type RenderItemProps = {
+  forecast: ForecastWeatherDataDetails;
+};
+
+export default function RenderItem({ forecast }: RenderItemProps) {
   const { icon, description } = forecast.weather[0];
   const { temp, feels_like } = forecast.main;
   const { speed } = forecast.wind;
   return (
     <LinearGradient
       colors={['#48309D', 'transparent']}
-      start={{x: 1, y: 0}}
-      end={{x: 1, y: 0}}
+      start={{ x: 1, y: 0 }}
+      end={{ x: 1, y: 0 }}
       style={styles.container}>
       <View style={styles.detailsContainer}>
         <Text style={styles.temp}>{temp.toFixed(1)} °</Text>

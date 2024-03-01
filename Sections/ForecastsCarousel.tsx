@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 
 import ForecastCard from '../components/ForecastCard';
@@ -13,13 +13,12 @@ type DescriptionProps = {
   description: string;
   icon: string;
 };
-type ForecastWeatherDataDetails = {
+export type ForecastWeatherDataDetails = {
   main: WeatherDataMainProps;
   weather: DescriptionProps[];
+  wind: { speed: number };
   dt: number;
   dt_txt: string;
-  snow?: number;
-  rain?: number;
 };
 
 export type ForecastWeatherDataProps = {
@@ -53,10 +52,12 @@ export default function ForecastsCarousel({
       forecastsByDate[date].push(forecastListItem);
     });
 
-    const dayGroups: DayForecasts[] = Object.entries(forecastsByDate).map(([date, forecasts]) => ({
-      date,
-      forecasts
-    }));
+    const dayGroups: DayForecasts[] = Object.entries(forecastsByDate).map(
+      ([date, forecasts]) => ({
+        date,
+        forecasts,
+      })
+    );
 
     setForecastData(dayGroups);
   }, [forecastWeatherData]);
@@ -71,7 +72,6 @@ export default function ForecastsCarousel({
       ))}
     </View>
   );
-
 }
 
 const styles = StyleSheet.create({

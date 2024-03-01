@@ -1,4 +1,5 @@
 import { StyleSheet, Text, View } from 'react-native';
+
 type DescriptionProps = {
   id: number;
   main: string;

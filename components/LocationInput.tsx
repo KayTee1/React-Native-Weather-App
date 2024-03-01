@@ -13,7 +13,7 @@ export default function LocationInput({
   onChangeText,
   fetchData,
 }: LocationInputProps) {
-  const [inputVisible, setInputVisible] = useState(false);
+  const [inputVisible, setInputVisible] = useState<boolean>(false);
   const inputWidth = useRef(new Animated.Value(0)).current;
 
   const toggleInput = () => {

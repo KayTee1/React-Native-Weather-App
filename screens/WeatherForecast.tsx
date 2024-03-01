@@ -1,15 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { StyleSheet, View } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
 
 import getWeatherData from '../util/getWeatherData';
 
-import Header from '../components/Header';
 import WeatherDetails from '../Sections/WeatherDetails';
 import ForecastCarousel, {
   ForecastWeatherDataProps,
 } from '../Sections/ForecastsCarousel';
+
+import Header from '../components/Header';
 import LocationInput from '../components/LocationInput';
-import { LinearGradient } from 'expo-linear-gradient';
 
 export type DescriptionProps = {
   id: number;
@@ -29,7 +30,7 @@ type WeatherData = {
 };
 
 const WeatherForecast = () => {
-  //state for input
+  //state for location input
   const [text, onChangeText] = useState<string>('');
 
   const [currentWeatherData, setCurrentWeatherData] =
@@ -73,13 +74,11 @@ const WeatherForecast = () => {
         name={name}
       />
       <ForecastCarousel forecastWeatherData={forecastWeatherData} />
-      <View style={{ }}>
-        <LocationInput
-          text={text}
-          onChangeText={onChangeText}
-          fetchData={fetchData}
-        />
-      </View>
+      <LocationInput
+        text={text}
+        onChangeText={onChangeText}
+        fetchData={fetchData}
+      />
     </LinearGradient>
   );
 };

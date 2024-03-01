@@ -1,8 +1,8 @@
-import React from 'react';
-import { StyleSheet, Text, View, Image } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
+
+import { DescriptionProps } from '../screens/WeatherForecast';
 import { getFormattedTime } from '../util/getTime';
 import WeatherIcon from './WeatherIcon';
-import { DescriptionProps } from '../screens/WeatherForecast';
 
 type HeaderProps = {
   weather: DescriptionProps[];
@@ -10,8 +10,6 @@ type HeaderProps = {
 };
 
 export default function Header({ weather, dt }: HeaderProps) {
-  // TODO: Get the current time and format it from screen
-  // make this reuseable by passing more stuff in
   const formattedDate = getFormattedTime(dt);
 
   const { icon } = weather[0];
