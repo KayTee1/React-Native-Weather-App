@@ -1,0 +1,92 @@
+import { Modal, Pressable, StyleSheet, TextInput, View } from 'react-native';
+import Icon from 'react-native-vector-icons/EvilIcons';
+
+type LocationInputModalProps = {
+  modalVisible: boolean;
+  setModalVisible: (visible: boolean) => void;
+  text: string;
+  onChangeText: (text: string) => void;
+  handleSearch: () => void;
+};
+
+export default function LocationInputModal({
+  handleSearch,
+  modalVisible,
+  setModalVisible,
+  text,
+  onChangeText,
+}: LocationInputModalProps) {
+  return (
+    <Modal
+      animationType="fade"
+      transparent={true}
+      visible={modalVisible}
+      onRequestClose={() => {
+        setModalVisible(!modalVisible);
+      }}>
+      <View style={styles.centeredView}>
+        <View style={styles.modalView}>
+          <TextInput
+            style={styles.input}
+            onChangeText={onChangeText}
+            value={text}
+            placeholder="Enter location"
+            onSubmitEditing={handleSearch}
+          />
+          <Pressable onPress={handleSearch}>
+            <Icon
+              name="check"
+              size={48}
+              color="black"
+            />
+          </Pressable>
+        </View>
+      </View>
+    </Modal>
+  );
+}
+
+const styles = StyleSheet.create({
+  input: {
+    flex: 1,
+    height: 40,
+    borderWidth: 1,
+    paddingHorizontal: 10,
+    backgroundColor: 'white',
+    borderRadius: 10,
+  },
+  centeredView: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 22,
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: 'white',
+    borderRadius: 20,
+    padding: 15,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  button: {
+    borderRadius: 20,
+    padding: 10,
+    elevation: 2,
+  },
+  buttonOpen: {
+    backgroundColor: '#F194FF',
+  },
+  buttonClose: {
+    backgroundColor: '#2196F3',
+  },
+  textStyle: {
+    color: 'white',
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  modalText: {
+    marginBottom: 15,
+    textAlign: 'center',
+  },
+});

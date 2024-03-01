@@ -68,8 +68,9 @@ const styles = StyleSheet.create({
   },
   forecastsContainer: {
     flexDirection: "column",
-    height: "65%",
+    height: 400,
     overflow: "scroll",
+    position: "relative",
   },
   text: {
     color: "black",
