@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View } from "react-native";
-import { DescriptionProps, WeatherDataMainProps } from "../types/Types";
+
 import { showToast } from "../util/showToast";
+import { DescriptionProps, WeatherDataMainProps } from "../types/Types";
 
 type WeatherDetailsProps = {
   weather: DescriptionProps[];

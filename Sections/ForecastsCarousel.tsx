@@ -1,11 +1,10 @@
-import { FlatList } from "react-native-gesture-handler";
 import { useEffect, useState } from "react";
 import { StyleSheet, View } from "react-native";
+import { FlatList } from "react-native-gesture-handler";
 
 import { WeatherData } from "../types/Types";
 
 import ForecastCard from "../components/ForecastCard";
-import { showToast } from "../util/showToast";
 
 export type ForecastWeatherDataProps = {
   cod: string;

@@ -2,11 +2,12 @@ import { Pressable, StyleSheet, Text, View } from "react-native";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { LinearGradient } from "react-native-linear-gradient";
 import { StackNavigationProp } from "@react-navigation/stack";
+import { FlatList } from "react-native-gesture-handler";
 
-import RenderItem from "../components/RenderItem";
 import { getFormattedTime } from "../util/getTime";
 import { WeatherData } from "../types/Types";
-import { FlatList } from "react-native-gesture-handler";
+
+import RenderItem from "../components/RenderItem";
 
 type RootStackParamList = {
   data: {

@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
 import { SafeAreaView, StyleSheet, View } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
-
-import { WeatherData } from "../types/Types";
 import Toast from "react-native-toast-message";
 
 import { fetchWeatherData } from "../util/getWeatherData";
 import { getCurrentLocation } from "../util/getLocation";
 import { showToast } from "../util/showToast";
+
+import { WeatherData } from "../types/Types";
 
 import WeatherDetails from "../Sections/WeatherDetails";
 import ForecastCarousel, {
@@ -33,7 +33,6 @@ export default function WeatherForecast() {
         onChangeText(city);
       }
     }
-
     try {
       const currentResult = await fetchWeatherData("current", text);
       if ("weatherData" in currentResult && currentResult.weatherData) {

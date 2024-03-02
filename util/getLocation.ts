@@ -1,5 +1,6 @@
-import Geolocation from "react-native-geolocation-service";
 import { PermissionsAndroid } from "react-native";
+import Geolocation from "react-native-geolocation-service";
+
 import { showToast } from "./showToast";
 
 // Function to get permission for location

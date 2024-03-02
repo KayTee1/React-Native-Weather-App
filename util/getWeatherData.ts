@@ -1,6 +1,6 @@
 import { ForecastWeatherDataProps } from "../Sections/ForecastsCarousel.js";
 import { APIKEY } from "../secrets.js";
-import { ErrorData, WeatherData } from "../types/Types.js";
+import { WeatherData } from "../types/Types.js";
 import { showToast } from "./showToast";
 
 const MAX_RETRIES = 3;
