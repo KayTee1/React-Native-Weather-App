@@ -36,7 +36,6 @@ const WeatherForecast = () => {
       setForecastWeatherData(forecastData);
     } catch (error) {
       console.error('Error fetching weather data:', error);
-      throw error;
     }
   };
   useEffect(() => {

@@ -14,11 +14,15 @@ export default function GetWeatherData(option: Option, text: string) {
         ? (fetch_url = current_url)
         : (fetch_url = forecast_url);
       const res = await fetch(fetch_url);
-      const data = await res.json();
-
-      return data;
+      if (!res.ok) {
+        GetWeatherData('current', 'Tampere');
+        return;
+      } else {
+        const data = await res.json();
+        return data;
+      }
     } catch (error) {
-      return error;
+      GetWeatherData('current', 'Tampere');
     }
   };
 
