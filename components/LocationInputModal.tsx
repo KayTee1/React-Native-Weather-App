@@ -1,5 +1,12 @@
 import React from "react";
-import { Modal, Pressable, StyleSheet, Text, TextInput, View } from "react-native";
+import {
+  Modal,
+  Pressable,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+} from "react-native";
 import Icon from "react-native-vector-icons/EvilIcons";
 
 type LocationInputModalProps = {
@@ -26,7 +33,12 @@ export default function LocationInputModal({
         setModalVisible(!modalVisible);
       }}
     >
-      <View style={styles.centeredView}>
+      <Pressable
+        style={styles.centeredView}
+        onPress={() => {
+          setModalVisible(!modalVisible);
+        }}
+      >
         <View style={styles.modalView}>
           <View style={styles.inputContainer}>
             <TextInput
@@ -36,8 +48,13 @@ export default function LocationInputModal({
               placeholder="Enter location"
               onSubmitEditing={() => handleSearch("normal")}
             />
-            <Pressable style={styles.checkButton} onPress={() => handleSearch("normal")}>
-              <Icon name="check" size={48} color="black" />
+            <Pressable onPress={() => handleSearch("normal")}>
+              <Icon
+                style={{ height: 50 }}
+                name="check"
+                size={48}
+                color="black"
+              />
             </Pressable>
           </View>
           <Pressable
@@ -50,7 +67,7 @@ export default function LocationInputModal({
             <Text>Use current location</Text>
           </Pressable>
         </View>
-      </View>
+      </Pressable>
     </Modal>
   );
 }
@@ -59,11 +76,6 @@ const styles = StyleSheet.create({
   inputContainer: {
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "center",
-    marginBottom: 10,
-  },
-  checkButton: {
-    marginLeft: 10,
   },
   gps_button: {
     justifyContent: "center",
@@ -86,7 +98,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 22,
+    backgroundColor: "rgba(0, 0, 0, 0)",
   },
   modalView: {
     margin: 20,

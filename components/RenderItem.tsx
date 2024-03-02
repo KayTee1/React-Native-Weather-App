@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View } from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
+import { LinearGradient } from "react-native-linear-gradient";
 
 import WeatherIcon from './WeatherIcon';
 import { WeatherData } from '../types/Types';

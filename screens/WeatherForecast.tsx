@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { SafeAreaView, StyleSheet, View } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
+import { LinearGradient } from "react-native-linear-gradient";
 
 import { WeatherData } from "../types/Types";
 import { fetchWeatherData } from "../util/getWeatherData";

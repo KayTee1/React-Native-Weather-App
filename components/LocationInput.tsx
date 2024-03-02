@@ -17,7 +17,7 @@ export default function LocationInput({
   const [modalVisible, setModalVisible] = useState(false);
 
   //options: "normal", "gps"
-  const handleSearch = (option: string) => {
+  const handleSearch = (option?: string) => {
     setModalVisible(!modalVisible);
     fetchData();
   };

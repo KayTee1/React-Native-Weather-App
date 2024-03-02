@@ -1,5 +1,6 @@
 import Geolocation from "react-native-geolocation-service";
 import { PermissionsAndroid } from "react-native";
+
 // Function to get permission for location
 const requestLocationPermission = async () => {
   try {
@@ -35,6 +36,7 @@ export const getCurrentLocation = async () => {
     Geolocation.getCurrentPosition(
       (position) => {
         const { latitude, longitude } = position.coords;
+        // Get the city name from the latitude and longitude
         const city = getReverseGeocoding(latitude, longitude);
         return city;
       },
@@ -49,6 +51,7 @@ export const getCurrentLocation = async () => {
   return null;
 };
 
+// Function to get the city name from the latitude and longitude
 export const getReverseGeocoding = async (
   latitude: number,
   longitude: number
