@@ -3,17 +3,19 @@ import { SafeAreaView, StyleSheet, View } from "react-native";
 import { LinearGradient } from "react-native-linear-gradient";
 
 import { WeatherData } from "../types/Types";
+import Toast from "react-native-toast-message";
+
 import { fetchWeatherData } from "../util/getWeatherData";
+import { getCurrentLocation } from "../util/getLocation";
+import { showToast } from "../util/showToast";
 
 import WeatherDetails from "../Sections/WeatherDetails";
-
 import ForecastCarousel, {
   ForecastWeatherDataProps,
 } from "../Sections/ForecastsCarousel";
 
 import Header from "../components/Header";
 import LocationInput from "../components/LocationInput";
-import { getCurrentLocation, getReverseGeocoding } from "../util/getLocation";
 
 export default function WeatherForecast() {
   //state for location input
@@ -31,12 +33,17 @@ export default function WeatherForecast() {
         onChangeText(city);
       }
     }
+
     try {
       const currentData = await fetchWeatherData("current", text);
       const forecastData = await fetchWeatherData("forecast", text);
       setCurrentWeatherData(currentData);
       setForecastWeatherData(forecastData);
     } catch (error) {
+      showToast({
+        type: "error",
+        message: ["Error", "There was an error fetching the weather data"],
+      });
       console.error("Error fetching weather data:", error);
     }
     onChangeText("");
@@ -46,6 +53,11 @@ export default function WeatherForecast() {
   }, []);
 
   if (!currentWeatherData) {
+    showToast({
+      type: "error",
+      message: ["Error", "There was an error fetching data"],
+    });
+
     return null;
   }
 
@@ -67,6 +79,7 @@ export default function WeatherForecast() {
             fetchData={fetchData}
           />
         </View>
+        <Toast />
       </LinearGradient>
     </SafeAreaView>
   );
