@@ -71,7 +71,7 @@ export default function ForecastCard({
         size="sm"
       />
       <Text style={styles.tempText}>
-        {displayedData.averageTemp.toFixed(0)} °C
+        {displayedData.averageTemp.toFixed(1)} °C
       </Text>
     </Pressable>
   );

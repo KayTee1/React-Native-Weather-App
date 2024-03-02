@@ -1,9 +1,8 @@
 import { StyleSheet, Text, View } from "react-native";
-import LinearGradient from "react-native-linear-gradient";
+import { LinearGradient } from "react-native-linear-gradient";
 
 import WeatherIcon from "./WeatherIcon";
 import { WeatherData } from "../types/Types";
-import { getTime } from "../util/getTime";
 
 type RenderItemProps = {
   forecast: WeatherData;
@@ -13,20 +12,17 @@ export default function RenderItem({ forecast }: RenderItemProps) {
   const { icon, description } = forecast.weather[0];
   const { temp, feels_like } = forecast.main;
   const { speed } = forecast.wind;
-  const { dt } = forecast;
-
   return (
     <LinearGradient
-      start={{ x: 0, y: 0 }}
-      end={{ x: 1, y: 0 }}
       colors={["#48309D", "transparent"]}
+      start={{ x: 1, y: 0 }}
+      end={{ x: 1, y: 0 }}
       style={styles.container}
     >
       <View style={styles.detailsContainer}>
-        <Text style={styles.temp}>{temp.toFixed(0)} °</Text>
+        <Text style={styles.temp}>{temp.toFixed(1)} °</Text>
         <View style={styles.moreDetails}>
-          <Text style={styles.text}>{getTime(dt)}</Text>
-          <Text style={styles.text}>Feels like: {feels_like.toFixed(0)} °C</Text>
+          <Text style={styles.text}>Feels like: {feels_like} °C</Text>
           <Text style={styles.text}>Wind speed {speed} m/s</Text>
         </View>
       </View>
@@ -52,7 +48,9 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-around",
     alignItems: "center",
-    borderRadius: 20,
+    borderWidth: 1,
+    borderColor: "black",
+    borderRadius: 15,
     minWidth: 300,
     minHeight: 150,
     margin: 10,

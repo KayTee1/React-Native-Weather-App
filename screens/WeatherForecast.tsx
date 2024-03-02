@@ -71,7 +71,7 @@ export default function WeatherForecast() {
   return (
     <SafeAreaView style={styles.container}>
       <LinearGradient
-        colors={["black", "transparent"]}
+        colors={["rgba(0,0,0,0.8)", "transparent"]}
         style={styles.container}
       >
         <Header weather={weather} dt={dt} />

@@ -24,12 +24,12 @@ export default function WeatherDetails({
   return (
     <View style={styles.main_container}>
       <View style={styles.temp_container}>
-        <Text style={styles.temperature}>{temp.toFixed(0)} </Text>
+        <Text style={styles.temperature}>{temp.toFixed(1)} </Text>
         <Text style={styles.degree}>°C</Text>
       </View>
       <Text style={styles.location}>{name}</Text>
       <View style={styles.description}>
-        <Text style={styles.text}>Feels like {feels_like.toFixed(0)}</Text>
+        <Text style={styles.text}>Feels like {feels_like.toFixed(1)}</Text>
         <Text style={styles.ball_char}> ⬤ </Text>
         <Text style={styles.text}>{weather[0].main}</Text>
       </View>
