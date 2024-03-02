@@ -4,8 +4,6 @@ type ToastProps = {
   type: "success" | "error" | "info";
   message: string[];
 };
-
-// Function to show toast messages
 export const showToast = ({ type, message }: ToastProps) => {
   Toast.show({
     type: type,
