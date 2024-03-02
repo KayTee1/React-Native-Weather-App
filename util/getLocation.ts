@@ -1,5 +1,6 @@
 import Geolocation from "react-native-geolocation-service";
 import { PermissionsAndroid } from "react-native";
+import { showToast } from "./showToast";
 
 // Function to get permission for location
 const requestLocationPermission = async () => {
@@ -16,13 +17,23 @@ const requestLocationPermission = async () => {
     );
     console.log("granted", granted);
     if (granted === "granted") {
-      console.log("You can use Geolocation");
+      showToast({
+        type: "success",
+        message: ["Success", "Location permission granted"],
+      });
       return true;
     } else {
-      console.log("You cannot use Geolocation");
+      showToast({
+        type: "info",
+        message: ["Info", "Location permission not granted"],
+      });
       return false;
     }
   } catch (err) {
+    showToast({
+      type: "error",
+      message: ["Error", "There was an error getting location permission"],
+    });
     return false;
   }
 };
@@ -42,11 +53,18 @@ export const getCurrentLocation = async () => {
       },
       (error) => {
         console.log("Error getting location:", error);
+        showToast({
+          type: "error",
+          message: ["Error", "There was an error getting your location"],
+        });
       },
       { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 }
     );
   } else {
-    console.log("Location permission not granted");
+    showToast({
+      type: "info",
+      message: ["Info", "Location permission not granted"],
+    });
   }
   return null;
 };
@@ -56,10 +74,19 @@ export const getReverseGeocoding = async (
   latitude: number,
   longitude: number
 ) => {
-  const response = await fetch(
-    `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}&localityLanguage=en`
-  );
-  const data = await response.json();
-  const { city } = data;
-  return city;
+  try {
+    const response = await fetch(
+      `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}&localityLanguage=en`
+    );
+    const data = await response.json();
+    const { city } = data;
+
+    return city;
+  } catch (error) {
+    console.log("Error getting city name:", error);
+    showToast({
+      type: "error",
+      message: ["Error", "There was an error getting the city name"],
+    });
+  }
 };

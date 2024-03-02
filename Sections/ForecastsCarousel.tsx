@@ -1,10 +1,11 @@
-import { FlatList } from 'react-native-gesture-handler';
-import { useEffect, useState } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { FlatList } from "react-native-gesture-handler";
+import { useEffect, useState } from "react";
+import { StyleSheet, View } from "react-native";
 
-import { WeatherData } from '../types/Types';
+import { WeatherData } from "../types/Types";
 
-import ForecastCard from '../components/ForecastCard';
+import ForecastCard from "../components/ForecastCard";
+import { showToast } from "../util/showToast";
 
 export type ForecastWeatherDataProps = {
   cod: string;
@@ -29,13 +30,18 @@ export default function ForecastsCarousel({
       !forecastWeatherData ||
       !forecastWeatherData.list ||
       !forecastWeatherData.list.length
-    )
+    ) {
+      showToast({
+        type: "error",
+        message: ["Error", "There was an error fetching the forecast data"],
+      });
       return;
+    }
 
     const forecastsByDate: { [key: string]: WeatherData[] } = {};
 
     forecastWeatherData.list.forEach((forecastListItem) => {
-      const date = forecastListItem.dt_txt.split(' ')[0];
+      const date = forecastListItem.dt_txt.split(" ")[0];
       if (!forecastsByDate[date]) {
         forecastsByDate[date] = [];
       }
@@ -67,10 +73,9 @@ export default function ForecastsCarousel({
 const styles = StyleSheet.create({
   container: {
     marginTop: 50,
-    flexDirection: 'row',
-    overflow: 'scroll',
-    maxWidth: '100%',
+    flexDirection: "row",
+    overflow: "scroll",
+    maxWidth: "100%",
     maxHeight: 200,
-    
   },
 });

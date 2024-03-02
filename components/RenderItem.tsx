@@ -1,8 +1,8 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View } from "react-native";
 import { LinearGradient } from "react-native-linear-gradient";
 
-import WeatherIcon from './WeatherIcon';
-import { WeatherData } from '../types/Types';
+import WeatherIcon from "./WeatherIcon";
+import { WeatherData } from "../types/Types";
 
 type RenderItemProps = {
   forecast: WeatherData;
@@ -14,10 +14,11 @@ export default function RenderItem({ forecast }: RenderItemProps) {
   const { speed } = forecast.wind;
   return (
     <LinearGradient
-      colors={['#48309D', 'transparent']}
+      colors={["#48309D", "transparent"]}
       start={{ x: 1, y: 0 }}
       end={{ x: 1, y: 0 }}
-      style={styles.container}>
+      style={styles.container}
+    >
       <View style={styles.detailsContainer}>
         <Text style={styles.temp}>{temp.toFixed(1)} °</Text>
         <View style={styles.moreDetails}>
@@ -27,10 +28,7 @@ export default function RenderItem({ forecast }: RenderItemProps) {
       </View>
       <View style={styles.detailsContainer}>
         <View style={styles.icon}>
-          <WeatherIcon
-            iconCode={icon}
-            size="lg"
-          />
+          <WeatherIcon iconCode={icon} size="lg" />
         </View>
         <Text style={styles.description}>{capitalizeWords(description)}</Text>
       </View>
@@ -39,50 +37,50 @@ export default function RenderItem({ forecast }: RenderItemProps) {
 }
 export function capitalizeWords(str: string) {
   return str
-    .split(' ')
+    .split(" ")
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(' ');
+    .join(" ");
 }
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'lightgrey',
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'center',
+    backgroundColor: "lightgrey",
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "center",
     borderWidth: 1,
-    borderColor: 'black',
+    borderColor: "black",
     borderRadius: 15,
     minWidth: 300,
     minHeight: 150,
     margin: 10,
   },
   detailsContainer: {
-    flexDirection: 'column',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    flexDirection: "column",
+    justifyContent: "space-between",
+    alignItems: "center",
     marginTop: 10,
   },
   temp: {
     fontSize: 36,
-    color: 'black',
+    color: "black",
     marginBottom: 40,
     marginRight: 30,
   },
   description: {
-    color: 'black',
+    color: "black",
     fontSize: 14,
     marginBottom: 15,
   },
   moreDetails: {
-    flexDirection: 'column',
-    fontWeight: '300',
+    flexDirection: "column",
+    fontWeight: "300",
   },
   icon: {
     marginBottom: 40,
   },
   text: {
-    color: 'black',
+    color: "black",
     fontSize: 14,
   },
 });

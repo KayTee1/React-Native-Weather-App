@@ -31,6 +31,11 @@ export default function WeatherForecast() {
       const city: string | null = await getCurrentLocation();
       if (city) {
         onChangeText(city);
+      } else {
+        showToast({
+          type: "error",
+          message: ["Error", "There was an error fetching your location"],
+        });
       }
     }
 
