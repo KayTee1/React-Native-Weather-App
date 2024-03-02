@@ -1,10 +1,9 @@
 import { StyleSheet, Text, View } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 
-import { getTime } from "../util/getTime";
-import { WeatherData } from "../types/Types";
-
 import WeatherIcon from "./WeatherIcon";
+import { WeatherData } from "../types/Types";
+import { getTime } from "../util/getTime";
 
 type RenderItemProps = {
   forecast: WeatherData;
@@ -27,9 +26,7 @@ export default function RenderItem({ forecast }: RenderItemProps) {
         <Text style={styles.temp}>{temp.toFixed(0)} °</Text>
         <View style={styles.moreDetails}>
           <Text style={styles.text}>{getTime(dt)}</Text>
-          <Text style={styles.text}>
-            Feels like: {feels_like.toFixed(0)} °C
-          </Text>
+          <Text style={styles.text}>Feels like: {feels_like.toFixed(0)} °C</Text>
           <Text style={styles.text}>Wind speed {speed} m/s</Text>
         </View>
       </View>

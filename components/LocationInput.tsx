@@ -1,6 +1,5 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { View, StyleSheet, Pressable } from "react-native";
-
 import Icon from "react-native-vector-icons/EvilIcons";
 import LocationInputModal from "./LocationInputModal";
 

@@ -6,6 +6,10 @@ export type WeatherData = {
   dt: number;
   dt_txt: string;
   name: string;
+  sys: { country: string };
+  snow?: { '3h': number };
+  rain?: { '3h': number };
+  clouds: { all: number };
 };
 
 // types for weather[0]
@@ -20,4 +24,9 @@ export type DescriptionProps = {
 export type WeatherDataMainProps = {
   temp: number;
   feels_like: number;
+};
+
+// types for error data
+export type ErrorData = {
+  error: string;
 };
