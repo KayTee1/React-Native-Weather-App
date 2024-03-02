@@ -25,7 +25,7 @@ export default function LocationInput({
 }: LocationInputProps) {
   const [modalVisible, setModalVisible] = useState(false);
 
-  const handleSearch = () => {
+  const handleSearch = (option: string) => {
     setModalVisible(!modalVisible);
     fetchData();
   };
