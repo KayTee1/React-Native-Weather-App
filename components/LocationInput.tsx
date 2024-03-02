@@ -1,6 +1,7 @@
-import React, { useState, useRef } from 'react';
-import { View, StyleSheet, TextInput, Animated, Pressable } from 'react-native';
-import Icon from 'react-native-vector-icons/EvilIcons';
+import React, { useState, useRef } from "react";
+import { View, StyleSheet, Pressable } from "react-native";
+import Icon from "react-native-vector-icons/EvilIcons";
+import LocationInputModal from "./LocationInputModal";
 
 type LocationInputProps = {
   text: string;
@@ -13,41 +14,34 @@ export default function LocationInput({
   onChangeText,
   fetchData,
 }: LocationInputProps) {
-  const [inputVisible, setInputVisible] = useState<boolean>(false);
-  const inputWidth = useRef(new Animated.Value(0)).current;
+  const [modalVisible, setModalVisible] = useState(false);
 
-  const toggleInput = () => {
-    setInputVisible(!inputVisible);
-    Animated.timing(inputWidth, {
-      toValue: inputVisible ? 0 : 250,
-      duration: 300,
-      useNativeDriver: false,
-    }).start();
+  //options: "normal", "gps"
+  const handleSearch = (option?: string) => {
+    setModalVisible(!modalVisible);
+    fetchData();
   };
-
   return (
     <View style={styles.container}>
-      <Pressable onPress={toggleInput}>
-        <Icon
-          name="location"
-          size={24}
-          color="black"
-        />
-      </Pressable>
-      <Animated.View style={{ width: inputWidth }}>
-        <TextInput
-          style={styles.input}
-          onChangeText={onChangeText}
-          value={text}
-          placeholder="Enter location"
-        />
-      </Animated.View>
-      <Pressable onPress={fetchData}>
-        <Icon
-          name="check"
-          size={24}
-          color="black"
-        />
+      <LocationInputModal
+        handleSearch={handleSearch}
+        modalVisible={modalVisible}
+        setModalVisible={setModalVisible}
+        text={text}
+        onChangeText={onChangeText}
+      />
+      <Pressable
+        style={{
+          backgroundColor: "black",
+          height: 40,
+          width: 40,
+          justifyContent: "center",
+          alignItems: "center",
+          borderRadius: 10,
+        }}
+        onPress={() => setModalVisible(true)}
+      >
+        <Icon name="location" size={24} color="white" />
       </Pressable>
     </View>
   );
@@ -55,19 +49,11 @@ export default function LocationInput({
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: 'white',
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "white",
     borderRadius: 10,
     marginTop: 5,
     height: 40,
-  },
-  input: {
-    flex: 1,
-    height: 40,
-    borderWidth: 1,
-    paddingHorizontal: 10,
-    backgroundColor: 'white',
-    borderRadius: 10,
   },
 });
