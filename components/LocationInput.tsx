@@ -1,16 +1,7 @@
-import React, { useState, useRef } from 'react';
-import {
-  View,
-  StyleSheet,
-  TextInput,
-  Animated,
-  Pressable,
-  Modal,
-  Text,
-  Alert,
-} from 'react-native';
-import Icon from 'react-native-vector-icons/EvilIcons';
-import LocationInputModal from './LocationInputModal';
+import React, { useState, useRef } from "react";
+import { View, StyleSheet, Pressable } from "react-native";
+import Icon from "react-native-vector-icons/EvilIcons";
+import LocationInputModal from "./LocationInputModal";
 
 type LocationInputProps = {
   text: string;
@@ -25,6 +16,7 @@ export default function LocationInput({
 }: LocationInputProps) {
   const [modalVisible, setModalVisible] = useState(false);
 
+  //options: "normal", "gps"
   const handleSearch = (option: string) => {
     setModalVisible(!modalVisible);
     fetchData();
@@ -40,19 +32,16 @@ export default function LocationInput({
       />
       <Pressable
         style={{
-          backgroundColor: 'black',
+          backgroundColor: "black",
           height: 40,
           width: 40,
-          justifyContent: 'center',
-          alignItems: 'center',
+          justifyContent: "center",
+          alignItems: "center",
           borderRadius: 10,
         }}
-        onPress={() => setModalVisible(true)}>
-        <Icon
-          name="location"
-          size={24}
-          color="white"
-        />
+        onPress={() => setModalVisible(true)}
+      >
+        <Icon name="location" size={24} color="white" />
       </Pressable>
     </View>
   );
@@ -60,9 +49,9 @@ export default function LocationInput({
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: 'white',
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "white",
     borderRadius: 10,
     marginTop: 5,
     height: 40,

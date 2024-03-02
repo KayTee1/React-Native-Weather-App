@@ -13,8 +13,9 @@ import ForecastCarousel, {
 
 import Header from "../components/Header";
 import LocationInput from "../components/LocationInput";
+import { getCurrentLocation, getReverseGeocoding } from "../util/getLocation";
 
-const WeatherForecast = () => {
+export default function WeatherForecast() {
   //state for location input
   const [text, onChangeText] = useState<string>("");
 
@@ -23,8 +24,13 @@ const WeatherForecast = () => {
   const [forecastWeatherData, setForecastWeatherData] =
     useState<ForecastWeatherDataProps>({} as ForecastWeatherDataProps);
 
-  const fetchData = async () => {
-    onChangeText("");
+  const fetchData = async (option?: string) => {
+    if (option === "gps") {
+      const city: string | null = await getCurrentLocation();
+      if (city) {
+        onChangeText(city);
+      }
+    }
     try {
       const currentData = await fetchWeatherData("current", text);
       const forecastData = await fetchWeatherData("forecast", text);
@@ -33,6 +39,7 @@ const WeatherForecast = () => {
     } catch (error) {
       console.error("Error fetching weather data:", error);
     }
+    onChangeText("");
   };
   useEffect(() => {
     fetchData();
@@ -63,7 +70,7 @@ const WeatherForecast = () => {
       </LinearGradient>
     </SafeAreaView>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -76,5 +83,3 @@ const styles = StyleSheet.create({
     maxWidth: "100%",
   },
 });
-
-export default WeatherForecast;
