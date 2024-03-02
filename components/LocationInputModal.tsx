@@ -7,7 +7,7 @@ import {
   TextInput,
   View,
 } from "react-native";
-import Icon from "react-native-vector-icons/EvilIcons";
+import Icon from "react-native-vector-icons/FontAwesome";
 
 type LocationInputModalProps = {
   modalVisible: boolean;
@@ -51,7 +51,7 @@ export default function LocationInputModal({
             <Pressable onPress={() => handleSearch("normal")}>
               <Icon
                 style={{ height: 50 }}
-                name="check"
+                name="location-arrow"
                 size={48}
                 color="black"
               />
@@ -64,7 +64,7 @@ export default function LocationInputModal({
               setModalVisible(!modalVisible);
             }}
           >
-            <Text>Use current location</Text>
+            <Text style={{ color: "black" }}>Use current location</Text>
           </Pressable>
         </View>
       </Pressable>
@@ -93,6 +93,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     backgroundColor: "white",
     borderRadius: 10,
+    color: "black",
   },
   centeredView: {
     flex: 1,

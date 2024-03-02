@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import { View, StyleSheet, Pressable } from "react-native";
 import Icon from "react-native-vector-icons/EvilIcons";
 import LocationInputModal from "./LocationInputModal";
@@ -6,7 +6,7 @@ import LocationInputModal from "./LocationInputModal";
 type LocationInputProps = {
   text: string;
   onChangeText: (text: string) => void;
-  fetchData: () => void;
+  fetchData: (option?: string) => void;
 };
 
 export default function LocationInput({
@@ -19,7 +19,7 @@ export default function LocationInput({
   //options: "normal", "gps"
   const handleSearch = (option?: string) => {
     setModalVisible(!modalVisible);
-    fetchData();
+    fetchData(option);
   };
   return (
     <View style={styles.container}>
