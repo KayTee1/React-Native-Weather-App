@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { SafeAreaView, StyleSheet, View } from "react-native";
-import { LinearGradient } from "react-native-linear-gradient";
+import LinearGradient from "react-native-linear-gradient";
 
 import { WeatherData } from "../types/Types";
 import Toast from "react-native-toast-message";
@@ -31,26 +31,26 @@ export default function WeatherForecast() {
       const city: string | null = await getCurrentLocation();
       if (city) {
         onChangeText(city);
-      } else {
-        showToast({
-          type: "error",
-          message: ["Error", "There was an error fetching your location"],
-        });
       }
     }
 
     try {
-      const currentData = await fetchWeatherData("current", text);
-      const forecastData = await fetchWeatherData("forecast", text);
-      setCurrentWeatherData(currentData);
-      setForecastWeatherData(forecastData);
+      const currentResult = await fetchWeatherData("current", text);
+      if ("weatherData" in currentResult && currentResult.weatherData) {
+        setCurrentWeatherData(currentResult.weatherData);
+      }
+
+      const forecastResult = await fetchWeatherData("forecast", text);
+      if ("forecastData" in forecastResult && forecastResult.forecastData) {
+        setForecastWeatherData(forecastResult.forecastData);
+      }
     } catch (error) {
       showToast({
         type: "error",
         message: ["Error", "There was an error fetching the weather data"],
       });
-      console.error("Error fetching weather data:", error);
     }
+
     onChangeText("");
   };
   useEffect(() => {

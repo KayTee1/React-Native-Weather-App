@@ -25,3 +25,8 @@ export type WeatherDataMainProps = {
   temp: number;
   feels_like: number;
 };
+
+// types for error data
+export type ErrorData = {
+  error: string;
+};

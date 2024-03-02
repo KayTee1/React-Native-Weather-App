@@ -1,5 +1,6 @@
-import { StyleSheet, Text, View } from 'react-native';
-import { DescriptionProps, WeatherDataMainProps } from '../types/Types';
+import { StyleSheet, Text, View } from "react-native";
+import { DescriptionProps, WeatherDataMainProps } from "../types/Types";
+import { showToast } from "../util/showToast";
 
 type WeatherDetailsProps = {
   weather: DescriptionProps[];
@@ -12,6 +13,13 @@ export default function WeatherDetails({
   main,
   name,
 }: WeatherDetailsProps) {
+  if (!weather || !main) {
+    showToast({
+      type: "error",
+      message: ["Error", "There was an error fetching data"],
+    });
+    return;
+  }
   const { temp, feels_like } = main;
   return (
     <View style={styles.main_container}>
@@ -31,38 +39,38 @@ export default function WeatherDetails({
 const styles = StyleSheet.create({
   ball_char: {
     fontSize: 10,
-    color: '#fff',
+    color: "#fff",
     marginTop: 5,
     marginRight: 5,
     marginLeft: 5,
   },
   description: {
-    flexDirection: 'row',
+    flexDirection: "row",
   },
   main_container: {
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
   location: {
     fontSize: 24,
-    color: '#fff',
+    color: "#fff",
     marginBottom: 15,
   },
   temp_container: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
   },
   degree: {
     fontSize: 32,
-    color: '#fff',
+    color: "#fff",
     marginBottom: 15,
   },
   temperature: {
     fontSize: 50,
-    color: '#fff',
+    color: "#fff",
   },
   text: {
     fontSize: 18,
-    color: '#fff',
+    color: "#fff",
   },
 });

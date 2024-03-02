@@ -31,10 +31,6 @@ export default function ForecastsCarousel({
       !forecastWeatherData.list ||
       !forecastWeatherData.list.length
     ) {
-      showToast({
-        type: "error",
-        message: ["Error", "There was an error fetching the forecast data"],
-      });
       return;
     }
 
