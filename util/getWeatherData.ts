@@ -1,9 +1,7 @@
 import { ForecastWeatherDataProps } from "../Sections/ForecastsCarousel.js";
 import { APIKEY } from "../secrets.js";
-import { ErrorData, WeatherData } from "../types/Types.js";
+import { WeatherData } from "../types/Types.js";
 import { showToast } from "./showToast";
-
-const MAX_RETRIES = 3;
 
 type Option = "current" | "forecast";
 
@@ -19,8 +17,7 @@ export type FetchForecastDataResult = {
 
 export const fetchWeatherData = async (
   option: Option,
-  text: string,
-  retries = 0
+  text: string
 ): Promise<FetchCurrentWeatherDataResult | FetchForecastDataResult> => {
   const location = text || "Tampere"; // Default location
   const forecastCount = 40;
@@ -30,15 +27,14 @@ export const fetchWeatherData = async (
 
   try {
     const res = await fetch(fetch_url);
-    if (!res.ok) {
-      if (retries < MAX_RETRIES) {
-        // Retry with default location
-        return fetchWeatherData(option, "Tampere", retries + 1);
-      } else {
-        throw new Error("Maximum retries exceeded");
-      }
-    }
     const data = await res.json();
+    if (data.cod === "404") {
+      showToast({
+        type: "info",
+        message: ["Info", "Location not found, using Tampere as default"],
+      });
+      return fetchWeatherData(option, "Tampere");
+    }
     if (option === "current") {
       return { weatherData: data, forecastData: null, error: undefined };
     } else {
