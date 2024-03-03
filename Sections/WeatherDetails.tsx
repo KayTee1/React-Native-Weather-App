@@ -12,6 +12,7 @@ export default function WeatherDetails({
   main,
   name,
 }: WeatherDetailsProps) {
+  if(!weather || !main) return (<View></View>);
   const { temp, feels_like } = main;
   return (
     <View style={styles.main_container}>
