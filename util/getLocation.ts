@@ -79,10 +79,7 @@ export const getCurrentLocation = async (): Promise<string | null> => {
 };
 
 // Function to get the city name from the latitude and longitude
-export const getReverseGeocoding = async (
-  latitude: number,
-  longitude: number
-) => {
+const getReverseGeocoding = async (latitude: number, longitude: number) => {
   try {
     const response = await fetch(
       `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}&localityLanguage=en`
