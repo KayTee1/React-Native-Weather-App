@@ -19,7 +19,7 @@ export const fetchWeatherData = async (
   option: Option,
   text: string
 ): Promise<FetchCurrentWeatherDataResult | FetchForecastDataResult> => {
-  const location = text || "somalia"; // Default location
+  const location = text || "tampere"; // Default location
   const forecastCount = 40;
   const current_url = `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${APIKEY}&units=metric`;
   const forecast_url = `https://api.openweathermap.org/data/2.5/forecast?q=${location}&appid=${APIKEY}&units=metric&cnt=${forecastCount}`;

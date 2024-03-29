@@ -16,6 +16,7 @@ import ForecastCarousel, {
 
 import Header from "../components/Header";
 import LocationInput from "../components/LocationInput";
+import { getData } from "../util/storage";
 
 export default function WeatherForecast() {
   //state for location input
@@ -28,6 +29,10 @@ export default function WeatherForecast() {
 
   const fetchData = async (option?: string) => {
     let cityLocation = text;
+    const defaultLocation = await getData("defaultLocation", "tampere");
+    if (defaultLocation) {
+      cityLocation = defaultLocation;
+    }
     if (option === "gps") {
       const city: string | null = await getCurrentLocation();
       if (city) {

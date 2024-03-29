@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { View, StyleSheet, Pressable } from "react-native";
 import Icon from "react-native-vector-icons/EvilIcons";
 import LocationInputModal from "./LocationInputModal";
+import { storeData } from "../util/storage";
 
 type LocationInputProps = {
   text: string;
@@ -19,6 +20,7 @@ export default function LocationInput({
   //options: "normal", "gps"
   const handleSearch = (option?: string) => {
     setModalVisible(!modalVisible);
+    storeData("defaultLocation", text);
     fetchData(option);
   };
   return (
