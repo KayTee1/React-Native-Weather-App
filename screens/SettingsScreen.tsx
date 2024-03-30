@@ -1,18 +1,32 @@
+import { useNavigation } from "@react-navigation/native";
 import React, { useState } from "react";
 import { StyleSheet, Text, View, TextInput, Pressable } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
-import { Dropdown } from 'react-native-element-dropdown';
+import { storeData } from "../util/storage";
+import LanguageDropdown from "../components/LanguageDropdown";
+
+type Languages = "En" | "Fi" | "Vn";
 
 export default function SettingsScreen() {
   const [defaultLocation, setDefaultLocation] = useState<string>("");
-  const [language, setLanguage] = useState<string>("");
+  const [language, setLanguage] = useState<Languages>("En");
+
+  const navigation = useNavigation();
 
   const handleSaveSettings = () => {
     console.log("Default Location:", defaultLocation);
     console.log("Language:", language);
-    
-  };
 
+    if (defaultLocation !== "") {
+      try {
+        storeData("defaultLocation", defaultLocation);
+        storeData("language", language);
+      } catch (e) {
+        console.log(e);
+      }
+    }
+    navigation.goBack();
+  };
   return (
     <LinearGradient
       colors={["rgba(0,0,0,0.8)", "transparent"]}
@@ -30,15 +44,10 @@ export default function SettingsScreen() {
         </View>
         <View style={styles.inputContainer}>
           <Text style={styles.label}>Language:</Text>
-          <TextInput
-            style={styles.input}
-            value={language}
-            onChangeText={(text) => setLanguage(text)}
-            placeholder="Enter language"
-          />
+          <LanguageDropdown language={language} setLanguage={setLanguage} />
         </View>
         <Pressable style={styles.button} onPress={handleSaveSettings}>
-          <Text style={{ color: "black" }}>Save Settings</Text>
+          <Text style={styles.buttonText}>Save Settings</Text>
         </Pressable>
       </View>
       <Text style={styles.footer}>Made with ❤️ by KayTee1</Text>
@@ -69,6 +78,10 @@ const styles = StyleSheet.create({
     width: "100%",
     alignItems: "center",
   },
+  buttonText: {
+    color: "black",
+    fontSize: 18,
+  },
   inputContainer: {
     marginBottom: 20,
     width: "100%",
@@ -82,6 +95,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     padding: 10,
     width: "100%",
+    color: "black",
   },
   footer: {
     position: "absolute",

@@ -10,7 +10,8 @@ export const storeData = async (name: string, value: string) => {
 };
 
 //getting default location name
-export const getData = async (name: string, defaultValue:string) => {
+export const getData = async (name: string) => {
+    const defaultValue = "tampere";
     try {
         let value = await AsyncStorage.getItem(name);
         //if value is null, set the default value

@@ -17,6 +17,7 @@ import ForecastCarousel, {
 import Header from "../components/Header";
 import LocationInput from "../components/LocationInput";
 import { getData } from "../util/storage";
+import { useNavigation } from "@react-navigation/native";
 
 export default function WeatherForecast() {
   //state for location input
@@ -27,9 +28,11 @@ export default function WeatherForecast() {
   const [forecastWeatherData, setForecastWeatherData] =
     useState<ForecastWeatherDataProps>({} as ForecastWeatherDataProps);
 
+  const navigation = useNavigation();
+
   const fetchData = async (option?: string) => {
     let cityLocation = text;
-    const defaultLocation = await getData("defaultLocation", "tampere");
+    const defaultLocation = await getData("defaultLocation");
     if (defaultLocation) {
       cityLocation = defaultLocation;
     }
@@ -67,8 +70,14 @@ export default function WeatherForecast() {
 
     onChangeText("");
   };
+
   useEffect(() => {
     fetchData();
+    const unsubscribe = navigation.addListener("focus", () => {
+      // Call fetchData when the screen comes into focus
+      fetchData();
+    });
+    return unsubscribe;
   }, []);
 
   if (!currentWeatherData) {
