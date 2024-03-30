@@ -33,11 +33,13 @@ export default function RenderItem({ forecast }: RenderItemProps) {
       <View style={styles.detailsContainer}>
         <Text style={styles.temp}>{temp.toFixed(0)} °</Text>
         <View style={styles.moreDetails}>
-          <Text style={styles.text}>{getTime(dt)}</Text>
+          <Text style={styles.time}>{getTime(dt)}</Text>
           <Text style={styles.text}>
             {t("feels_like")} {feels_like.toFixed(0)} °C
           </Text>
-          <Text style={styles.text}>{t("wind_speed")} {speed} m/s</Text>
+          <Text style={styles.text}>
+            {t("wind_speed")} {speed} m/s
+          </Text>
         </View>
       </View>
       <View style={styles.detailsContainer}>
@@ -67,11 +69,16 @@ const styles = StyleSheet.create({
     minHeight: 150,
     margin: 10,
   },
+  time:{
+    color: "black",
+    fontSize: 22,
+  },
   detailsContainer: {
     flexDirection: "column",
     justifyContent: "space-between",
     alignItems: "center",
     marginTop: 10,
+    marginBottom: 10,
   },
   temp: {
     fontSize: 36,
