@@ -15,6 +15,13 @@ export default function RenderItem({ forecast }: RenderItemProps) {
   const { speed } = forecast.wind;
   const { dt } = forecast;
 
+  if (!forecast)
+    return (
+      <View style={styles.container}>
+        <Text>Loading...</Text>
+      </View>
+    );
+
   return (
     <LinearGradient
       start={{ x: 0, y: 0 }}
@@ -26,16 +33,15 @@ export default function RenderItem({ forecast }: RenderItemProps) {
         <Text style={styles.temp}>{temp.toFixed(0)} °</Text>
         <View style={styles.moreDetails}>
           <Text style={styles.text}>{getTime(dt)}</Text>
-          <Text style={styles.text}>Feels like: {feels_like.toFixed(0)} °C</Text>
+          <Text style={styles.text}>
+            Feels like: {feels_like.toFixed(0)} °C
+          </Text>
           <Text style={styles.text}>Wind speed {speed} m/s</Text>
         </View>
       </View>
       <View style={styles.detailsContainer}>
         <View style={styles.icon}>
-          <WeatherIcon
-            iconCode={icon}
-            size="lg"
-          />
+          <WeatherIcon iconCode={icon} size="lg" />
         </View>
         <Text style={styles.description}>{capitalizeWords(description)}</Text>
       </View>
@@ -44,9 +50,9 @@ export default function RenderItem({ forecast }: RenderItemProps) {
 }
 export function capitalizeWords(str: string) {
   return str
-    .split(' ')
+    .split(" ")
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(' ');
+    .join(" ");
 }
 
 const styles = StyleSheet.create({
@@ -61,31 +67,31 @@ const styles = StyleSheet.create({
     margin: 10,
   },
   detailsContainer: {
-    flexDirection: 'column',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    flexDirection: "column",
+    justifyContent: "space-between",
+    alignItems: "center",
     marginTop: 10,
   },
   temp: {
     fontSize: 36,
-    color: 'black',
+    color: "black",
     marginBottom: 40,
     marginRight: 30,
   },
   description: {
-    color: 'black',
+    color: "black",
     fontSize: 14,
     marginBottom: 15,
   },
   moreDetails: {
-    flexDirection: 'column',
-    fontWeight: '300',
+    flexDirection: "column",
+    fontWeight: "300",
   },
   icon: {
     marginBottom: 40,
   },
   text: {
-    color: 'black',
+    color: "black",
     fontSize: 14,
   },
 });

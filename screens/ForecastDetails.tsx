@@ -1,12 +1,14 @@
 import { Pressable, StyleSheet, Text, View } from "react-native";
-import { useNavigation, useRoute } from "@react-navigation/native";
+import { FlatList } from "react-native-gesture-handler";
 import { LinearGradient } from "react-native-linear-gradient";
+
+import { useNavigation, useRoute } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 
-import RenderItem from "../components/RenderItem";
 import { getFormattedTime } from "../util/getTime";
 import { WeatherData } from "../types/Types";
-import { FlatList } from "react-native-gesture-handler";
+
+import RenderItem from "../components/RenderItem";
 
 type RootStackParamList = {
   data: {
@@ -27,7 +29,7 @@ export default function ForecastDetails() {
       style={styles.container}
     >
       <View style={styles.header}>
-        <Text style={styles.text}>Tampere, </Text>
+        <Text style={styles.text}>{data.forecasts[0].name}, </Text>
         <Text style={styles.text}>
           {getFormattedTime(data.forecasts[0].dt)}
         </Text>

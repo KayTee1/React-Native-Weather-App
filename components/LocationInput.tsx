@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { View, StyleSheet, Pressable } from "react-native";
 import Icon from "react-native-vector-icons/EvilIcons";
-import LocationInputModal from "./LocationInputModal";
+
 import { storeData } from "../util/storage";
+
+import LocationInputModal from "./LocationInputModal";
 
 type LocationInputProps = {
   text: string;

@@ -1,8 +1,9 @@
 import { StyleSheet, Text, View } from "react-native";
 
 import { getFormattedTime } from "../util/getTime";
-import WeatherIcon from "./WeatherIcon";
 import { DescriptionProps } from "../types/Types";
+
+import WeatherIcon from "./WeatherIcon";
 
 type HeaderProps = {
   weather: DescriptionProps[];
@@ -11,7 +12,12 @@ type HeaderProps = {
 
 export default function Header({ weather, dt }: HeaderProps) {
   const formattedDate = getFormattedTime(dt);
-  if (!weather) return <View></View>;
+  if (!weather)
+    return (
+      <View>
+        <Text>Loading...</Text>
+      </View>
+    );
   const { icon } = weather[0];
   return (
     <View style={styles.header}>
