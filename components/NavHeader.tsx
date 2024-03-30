@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { useNavigation, useRoute } from "@react-navigation/native";
 
@@ -24,18 +24,7 @@ const NavHeader = ({
   const navigation = useNavigation<navigationProp>();
   const route = useRoute();
   return (
-    <View
-      style={{
-        flexDirection: "row",
-        justifyContent: "space-between",
-        alignItems: "center",
-        height: 60,
-        padding: 13,
-        backgroundColor: "white",
-        borderBottomWidth: 1,
-        borderBottomColor: "lightgray",
-      }}
-    >
+    <View style={styles.container}>
       <View
         style={{
           flexDirection: "row",
@@ -65,5 +54,18 @@ const NavHeader = ({
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    height: 60,
+    padding: 13,
+    backgroundColor: "white",
+    borderBottomWidth: 1,
+    borderBottomColor: "lightgray",
+  },
+});
 
 export default NavHeader;

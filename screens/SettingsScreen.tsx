@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, View, TextInput, Pressable } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
+import { Dropdown } from 'react-native-element-dropdown';
 
 export default function SettingsScreen() {
-  const [defaultLocation, setDefaultLocation] = useState("");
-  const [language, setLanguage] = useState("");
+  const [defaultLocation, setDefaultLocation] = useState<string>("");
+  const [language, setLanguage] = useState<string>("");
 
   const handleSaveSettings = () => {
     console.log("Default Location:", defaultLocation);
     console.log("Language:", language);
+    
   };
 
   return (
