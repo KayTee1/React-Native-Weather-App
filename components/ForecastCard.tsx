@@ -37,7 +37,7 @@ export default function ForecastCard({
     weatherIcon: "",
   });
   const navigation = useNavigation<navigationProp>();
-  
+
   const handleNavigate = () => {
     navigation.navigate("Forecast", {
       data: dayForecast,
@@ -55,7 +55,7 @@ export default function ForecastCard({
     // randomIndex is used to get a random icon for the day
     const randomIndex = Math.floor(Math.random() * length);
     setDisplayedData({
-      weekDay: getWeekDay(dayForecast.forecasts[randomIndex].dt),
+      weekDay: getWeekDay(dayForecast.forecasts[0].dt),
       averageTemp: avgTemp,
       weatherIcon: dayForecast.forecasts[randomIndex].weather[0].icon,
     });
