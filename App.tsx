@@ -12,6 +12,18 @@ import NavHeader from "./components/NavHeader";
 
 const Stack = createStackNavigator();
 
+const generateScreenOptions =
+  (title: string, showBackButton: boolean) =>
+  ({ navigation }: { navigation: any }) => ({
+    header: (props: StackHeaderProps) => (
+      <NavHeader
+        title={title}
+        showBackButton={showBackButton}
+        onBackButtonPress={() => navigation.goBack()}
+      />
+    ),
+  });
+
 export default function App() {
   return (
     <NavigationContainer>
@@ -19,30 +31,18 @@ export default function App() {
         <Stack.Screen
           name="Weather Forecast"
           component={WeatherForecast}
-          options={({ navigation }) => ({
-            header: (props: StackHeaderProps) => (
-              <NavHeader
-                title="Weather Forecast"
-                showBackButton={false}
-                onBackButtonPress={() => navigation.goBack()}
-              />
-            ),
-          })}
+          options={generateScreenOptions("Weather Forecast", false)}
         />
         <Stack.Screen
           name="Forecast"
           component={ForecastDetails}
-          options={({ navigation }) => ({
-            header: (props: StackHeaderProps) => (
-              <NavHeader
-                title="Forecast Details"
-                showBackButton={true}
-                onBackButtonPress={() => navigation.goBack()}
-              />
-            ),
-          })}
+          options={generateScreenOptions("Forecast Details", true)}
         />
-        <Stack.Screen name="Settings" component={SettingsScreen} />
+        <Stack.Screen
+          name="Settings"
+          component={SettingsScreen}
+          options={generateScreenOptions("Settings", true)}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import { StackNavigationProp } from "@react-navigation/stack";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 
 import Icon from "react-native-vector-icons/AntDesign";
 
@@ -22,7 +22,7 @@ const NavHeader = ({
   onBackButtonPress,
 }: NavHeaderProps) => {
   const navigation = useNavigation<navigationProp>();
-
+  const route = useRoute();
   return (
     <View
       style={{
@@ -51,15 +51,17 @@ const NavHeader = ({
           {title}
         </Text>
       </View>
-      <Icon
-        onPress={() => {
-          navigation.navigate("Settings");
-        }}
-        name="setting"
-        size={24}
-        color="black"
-        style={{ marginRight: 10 }}
-      />
+      {route.name !== "Settings" && (
+        <Icon
+          onPress={() => {
+            navigation.navigate("Settings");
+          }}
+          name="setting"
+          size={24}
+          color="black"
+          style={{ marginRight: 10 }}
+        />
+      )}
     </View>
   );
 };
