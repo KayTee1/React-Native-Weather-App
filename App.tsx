@@ -15,28 +15,33 @@ const Stack = createStackNavigator();
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator
-        initialRouteName="Weather Forecast"
-        screenOptions={({ navigation, route }) => ({
-          header: (props: StackHeaderProps) => {
-            const { scene, previous } = props;
-            console.log(props)
-            const title = scene
-              ? scene.descriptor.options.title ?? route.name
-              : route.name;
-
-            return (
+      <Stack.Navigator initialRouteName="Weather Forecast">
+        <Stack.Screen
+          name="Weather Forecast"
+          component={WeatherForecast}
+          options={({ navigation }) => ({
+            header: (props: StackHeaderProps) => (
               <NavHeader
-                title={title}
-                showBackButton={previous != null}
-                onBackButtonPress={navigation.goBack}
+                title="Weather Forecast"
+                showBackButton={false}
+                onBackButtonPress={() => navigation.goBack()}
               />
-            );
-          },
-        })}
-      >
-        <Stack.Screen name="Weather Forecast" component={WeatherForecast} />
-        <Stack.Screen name="Forecast" component={ForecastDetails} />
+            ),
+          })}
+        />
+        <Stack.Screen
+          name="Forecast"
+          component={ForecastDetails}
+          options={({ navigation }) => ({
+            header: (props: StackHeaderProps) => (
+              <NavHeader
+                title="Forecast Details"
+                showBackButton={true}
+                onBackButtonPress={() => navigation.goBack()}
+              />
+            ),
+          })}
+        />
         <Stack.Screen name="Settings" component={SettingsScreen} />
       </Stack.Navigator>
     </NavigationContainer>
