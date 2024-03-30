@@ -29,7 +29,7 @@ export default function ForecastDetails() {
       style={styles.container}
     >
       <View style={styles.header}>
-        <Text style={styles.text}>Tampere, </Text>
+        <Text style={styles.text}>{data.forecasts[0].name}, </Text>
         <Text style={styles.text}>
           {getFormattedTime(data.forecasts[0].dt)}
         </Text>

@@ -90,7 +90,7 @@ export default function WeatherForecast() {
   }
 
   const { main, weather, name, dt } = currentWeatherData;
-
+  forecastWeatherData.name = name;
   return (
     <SafeAreaView style={styles.container}>
       <LinearGradient

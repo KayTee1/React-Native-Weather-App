@@ -37,7 +37,7 @@ export default function ForecastCard({
     weatherIcon: "",
   });
   const navigation = useNavigation<navigationProp>();
-
+  
   const handleNavigate = () => {
     navigation.navigate("Forecast", {
       data: dayForecast,

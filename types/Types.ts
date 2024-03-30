@@ -7,8 +7,6 @@ export type WeatherData = {
   dt_txt: string;
   name: string;
   sys: { country: string };
-  snow?: { '3h': number };
-  rain?: { '3h': number };
   clouds: { all: number };
 };
 
