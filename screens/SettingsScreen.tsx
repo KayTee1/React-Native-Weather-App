@@ -1,30 +1,34 @@
 import { useNavigation } from "@react-navigation/native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, View, TextInput, Pressable } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
-import { storeData } from "../util/storage";
+import { getData, storeData } from "../util/storage";
 import LanguageDropdown from "../components/LanguageDropdown";
+import { t } from "i18next";
+import i18n from "../i18n";
 
-type Languages = "En" | "Fi" | "Vn";
+type Languages = "en" | "fi" | "vn";
 
 export default function SettingsScreen() {
-  const [defaultLocation, setDefaultLocation] = useState<string>("");
-  const [language, setLanguage] = useState<Languages>("En");
-
   const navigation = useNavigation();
 
-  const handleSaveSettings = () => {
-    console.log("Default Location:", defaultLocation);
-    console.log("Language:", language);
+  const [defaultLocation, setDefaultLocation] = useState<string>("");
+  const [language, setLanguage] = useState<Languages>("en");
 
-    if (defaultLocation !== "") {
-      try {
-        storeData("defaultLocation", defaultLocation);
-        storeData("language", language);
-      } catch (e) {
-        console.log(e);
+  useEffect(() => {
+    getData("language").then((lang: string | null) => {
+      if (lang !== null && ["en", "fi", "vn"].includes(lang)) {
+        setLanguage(lang as Languages);
+      } else {
+        console.warn(`Unsupported language: ${lang}`);
       }
-    }
+    });
+  }, []);
+
+  const handleSaveSettings = () => {
+    storeData("defaultLocation", defaultLocation);
+    storeData("language", language);
+    i18n.changeLanguage(language);
     navigation.goBack();
   };
   return (
@@ -34,7 +38,7 @@ export default function SettingsScreen() {
     >
       <View style={styles.content}>
         <View style={styles.inputContainer}>
-          <Text style={styles.label}>Default Location:</Text>
+          <Text style={styles.label}>{t("default_location")}:</Text>
           <TextInput
             style={styles.input}
             value={defaultLocation}
@@ -43,14 +47,14 @@ export default function SettingsScreen() {
           />
         </View>
         <View style={styles.inputContainer}>
-          <Text style={styles.label}>Language:</Text>
+          <Text style={styles.label}>{t("language")}:</Text>
           <LanguageDropdown language={language} setLanguage={setLanguage} />
         </View>
         <Pressable style={styles.button} onPress={handleSaveSettings}>
-          <Text style={styles.buttonText}>Save Settings</Text>
+          <Text style={styles.buttonText}>{t("save_settings")}</Text>
         </Pressable>
       </View>
-      <Text style={styles.footer}>Made with ❤️ by KayTee1</Text>
+      <Text style={styles.footer}>{t("footer")}</Text>
     </LinearGradient>
   );
 }

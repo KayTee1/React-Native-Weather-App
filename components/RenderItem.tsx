@@ -4,6 +4,7 @@ import LinearGradient from "react-native-linear-gradient";
 import WeatherIcon from "./WeatherIcon";
 import { WeatherData } from "../types/Types";
 import { getTime } from "../util/getTime";
+import { t } from "i18next";
 
 type RenderItemProps = {
   forecast: WeatherData;
@@ -18,7 +19,7 @@ export default function RenderItem({ forecast }: RenderItemProps) {
   if (!forecast)
     return (
       <View style={styles.container}>
-        <Text>Loading...</Text>
+        <Text>{t("loading")}</Text>
       </View>
     );
 
@@ -34,9 +35,9 @@ export default function RenderItem({ forecast }: RenderItemProps) {
         <View style={styles.moreDetails}>
           <Text style={styles.text}>{getTime(dt)}</Text>
           <Text style={styles.text}>
-            Feels like: {feels_like.toFixed(0)} °C
+            {t("feels_like")} {feels_like.toFixed(0)} °C
           </Text>
-          <Text style={styles.text}>Wind speed {speed} m/s</Text>
+          <Text style={styles.text}>{t("wind_speed")} {speed} m/s</Text>
         </View>
       </View>
       <View style={styles.detailsContainer}>
