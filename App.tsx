@@ -27,7 +27,7 @@ const generateScreenOptions =
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Weather Forecast">
+      <Stack.Navigator initialRouteName="Settings">
         <Stack.Screen
           name="Weather Forecast"
           component={WeatherForecast}
