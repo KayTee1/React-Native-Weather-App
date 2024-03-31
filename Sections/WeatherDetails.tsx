@@ -1,5 +1,6 @@
-import { StyleSheet, Text, View } from 'react-native';
-import { DescriptionProps, WeatherDataMainProps } from '../types/Types';
+import { StyleSheet, Text, View } from "react-native";
+import { DescriptionProps, WeatherDataMainProps } from "../types/Types";
+import { t } from "i18next";
 
 type WeatherDetailsProps = {
   weather: DescriptionProps[];
@@ -12,7 +13,7 @@ export default function WeatherDetails({
   main,
   name,
 }: WeatherDetailsProps) {
-  if(!weather || !main) return (<View></View>);
+  if (!weather || !main) return <View></View>;
   const { temp, feels_like } = main;
   return (
     <View style={styles.main_container}>
@@ -22,7 +23,9 @@ export default function WeatherDetails({
       </View>
       <Text style={styles.location}>{name}</Text>
       <View style={styles.description}>
-        <Text style={styles.text}>Feels like {feels_like.toFixed(0)}</Text>
+        <Text style={styles.text}>
+          {t("feels_like")} {feels_like.toFixed(0)}
+        </Text>
         <Text style={styles.ball_char}> ⬤ </Text>
         <Text style={styles.text}>{weather[0].main}</Text>
       </View>
@@ -32,38 +35,38 @@ export default function WeatherDetails({
 const styles = StyleSheet.create({
   ball_char: {
     fontSize: 10,
-    color: '#fff',
+    color: "#fff",
     marginTop: 5,
     marginRight: 5,
     marginLeft: 5,
   },
   description: {
-    flexDirection: 'row',
+    flexDirection: "row",
   },
   main_container: {
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
   location: {
     fontSize: 24,
-    color: '#fff',
+    color: "#fff",
     marginBottom: 15,
   },
   temp_container: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
   },
   degree: {
     fontSize: 32,
-    color: '#fff',
+    color: "#fff",
     marginBottom: 15,
   },
   temperature: {
     fontSize: 50,
-    color: '#fff',
+    color: "#fff",
   },
   text: {
     fontSize: 18,
-    color: '#fff',
+    color: "#fff",
   },
 });

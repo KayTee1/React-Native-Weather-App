@@ -1,9 +1,11 @@
+import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 
 import { getFormattedTime } from "../util/getTime";
 import { DescriptionProps } from "../types/Types";
 
 import WeatherIcon from "./WeatherIcon";
+import { useTranslation } from "react-i18next";
 
 type HeaderProps = {
   weather: DescriptionProps[];
@@ -11,11 +13,13 @@ type HeaderProps = {
 };
 
 export default function Header({ weather, dt }: HeaderProps) {
+  const { t } = useTranslation();
+
   const formattedDate = getFormattedTime(dt);
   if (!weather)
     return (
       <View>
-        <Text>Loading...</Text>
+        <Text>{t("loading")}</Text>
       </View>
     );
   const { icon } = weather[0];
@@ -23,7 +27,7 @@ export default function Header({ weather, dt }: HeaderProps) {
     <View style={styles.header}>
       <WeatherIcon iconCode={icon} size="lg" />
       <View>
-        <Text style={styles.text}>Today</Text>
+        <Text style={styles.text}>{t("today")}</Text>
         <Text style={styles.time}>{formattedDate}</Text>
       </View>
     </View>

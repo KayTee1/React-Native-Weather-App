@@ -9,18 +9,27 @@ export const storeData = async (name: string, value: string) => {
     }
 };
 
-//getting default location name
-export const getData = async (name: string) => {
-    const defaultValue = "tampere";
+type Languages = "en" | "fi" | "vn";
+
+// getting default location name
+export const getData = async (name: string): Promise<string | Languages | null> => {
+    const defaultLocation = "tampere";
+    const defaultLanguage = "en";
+    let defaultValue = name === "defaultLocation" ? defaultLocation : defaultLanguage;
     try {
         let value = await AsyncStorage.getItem(name);
-        //if value is null, set the default value
+        // if value is null, set the default value
         if (value === null) {
             await storeData(name, defaultValue);
             value = defaultValue;
         }
-        return value
+        if (name === "language") {
+            return value as Languages;
+        } else {
+            return value;
+        }
     } catch (e) {
-        // error reading value
+        console.error("Error reading value:", e);
+        return null;
     }
 };

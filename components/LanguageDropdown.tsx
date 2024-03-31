@@ -3,7 +3,7 @@ import { StyleSheet, View, Text } from "react-native";
 import { Dropdown } from "react-native-element-dropdown";
 import Icon from "react-native-vector-icons/FontAwesome";
 
-type Languages = "En" | "Fi" | "Vn";
+type Languages = "en" | "fi" | "vn";
 type LanguageDropdownProps = {
   language: Languages;
   setLanguage: (language: Languages) => void;
@@ -14,9 +14,9 @@ type Data = {
 };
 
 const data: Data[] = [
-  { label: "English", language: "En" },
-  { label: "Suomi", language: "Fi" },
-  { label: "Tiếng Việt", language: "Vn" },
+  { label: "English", language: "en" },
+  { label: "Suomi", language: "fi" },
+  { label: "Tiếng Việt", language: "vn" },
 ];
 
 const LanguageDropdown = ({ language, setLanguage }: LanguageDropdownProps) => {

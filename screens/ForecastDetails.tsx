@@ -9,6 +9,7 @@ import { getFormattedTime } from "../util/getTime";
 import { WeatherData } from "../types/Types";
 
 import RenderItem from "../components/RenderItem";
+import { t } from "i18next";
 
 type RootStackParamList = {
   data: {
@@ -43,7 +44,7 @@ export default function ForecastDetails() {
         />
       </View>
       <Pressable style={styles.button} onPress={() => navigation.goBack()}>
-        <Text style={styles.buttonText}>Go back</Text>
+        <Text style={styles.buttonText}>{t("go_back")}</Text>
       </Pressable>
     </LinearGradient>
   );

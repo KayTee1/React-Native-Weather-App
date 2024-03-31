@@ -8,6 +8,7 @@ import {
   View,
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
+import { t } from "i18next";
 
 type LocationInputModalProps = {
   modalVisible: boolean;
@@ -64,7 +65,7 @@ export default function LocationInputModal({
               setModalVisible(!modalVisible);
             }}
           >
-            <Text style={{ color: "black" }}>Use current location</Text>
+            <Text style={{ color: "black" }}>{t("useGPS")}</Text>
           </Pressable>
         </View>
       </Pressable>

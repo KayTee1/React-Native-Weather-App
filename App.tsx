@@ -4,6 +4,9 @@ import {
   StackHeaderProps,
   createStackNavigator,
 } from "@react-navigation/stack";
+import "intl-pluralrules";
+import { useTranslation } from "react-i18next";
+import "./i18n";
 
 import WeatherForecast from "./screens/WeatherForecast";
 import ForecastDetails from "./screens/ForecastDetails";
@@ -25,23 +28,25 @@ const generateScreenOptions =
   });
 
 export default function App() {
+  const { t, i18n } = useTranslation();
+
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Weather Forecast">
         <Stack.Screen
           name="Weather Forecast"
           component={WeatherForecast}
-          options={generateScreenOptions("Weather Forecast", false)}
+          options={generateScreenOptions(t("Weather Forecast"), false)}
         />
         <Stack.Screen
           name="Forecast"
           component={ForecastDetails}
-          options={generateScreenOptions("Forecast Details", true)}
+          options={generateScreenOptions(t("Forecast Details"), true)}
         />
         <Stack.Screen
           name="Settings"
           component={SettingsScreen}
-          options={generateScreenOptions("Settings", true)}
+          options={generateScreenOptions(t("Settings"), true)}
         />
       </Stack.Navigator>
     </NavigationContainer>
