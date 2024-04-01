@@ -36,17 +36,17 @@ export default function App() {
         <Stack.Screen
           name="Weather Forecast"
           component={WeatherForecast}
-          options={generateScreenOptions(t("Weather Forecast"), false)}
+          options={generateScreenOptions(t("weather_forecast"), false)}
         />
         <Stack.Screen
           name="Forecast"
           component={ForecastDetails}
-          options={generateScreenOptions(t("Forecast Details"), true)}
+          options={generateScreenOptions(t("forecast_details"), true)}
         />
         <Stack.Screen
           name="Settings"
           component={SettingsScreen}
-          options={generateScreenOptions(t("Settings"), true)}
+          options={generateScreenOptions(t("settings"), true)}
         />
       </Stack.Navigator>
     </NavigationContainer>
