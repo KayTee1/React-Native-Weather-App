@@ -6,6 +6,8 @@ import { getData, storeData } from "../util/storage";
 import LanguageDropdown from "../components/LanguageDropdown";
 import { t } from "i18next";
 import i18n from "../i18n";
+import Toast from "react-native-toast-message";
+import { showToast } from "../util/showToast";
 
 type Languages = "en" | "fi" | "vn";
 
@@ -25,11 +27,23 @@ export default function SettingsScreen() {
     });
   }, []);
 
-  const handleSaveSettings = () => {
-    storeData("defaultLocation", defaultLocation);
-    storeData("language", language);
-    i18n.changeLanguage(language);
-    navigation.goBack();
+  const handleSaveSettings = async () => {
+    if (defaultLocation !== "") {
+      storeData("defaultLocation", defaultLocation);
+      showToast({
+        type: "success",
+        message: ["Success", t("default_location_saved")],
+      });
+      navigation.goBack();
+    }
+    const currentLanguage = await getData("language");
+    if (currentLanguage !== language) {
+      storeData("language", language);
+      showToast({
+        type: "success",
+        message: ["Success", t("language_saved")],
+      });
+    }
   };
   return (
     <LinearGradient
@@ -54,7 +68,8 @@ export default function SettingsScreen() {
           <Text style={styles.buttonText}>{t("save_settings")}</Text>
         </Pressable>
       </View>
-      <Text style={styles.footer}>{t("footer")}</Text>
+      <Text style={styles.footer}>{t("footer_text")}</Text>
+      <Toast />
     </LinearGradient>
   );
 }

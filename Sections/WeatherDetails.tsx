@@ -24,7 +24,7 @@ export default function WeatherDetails({
       <Text style={styles.location}>{name}</Text>
       <View style={styles.description}>
         <Text style={styles.text}>
-          {t("feels_like")} {feels_like.toFixed(0)}
+          {t("feels_like")} {feels_like.toFixed(0)} °C
         </Text>
         <Text style={styles.ball_char}> ⬤ </Text>
         <Text style={styles.text}>{weather[0].main}</Text>
