@@ -1,18 +1,20 @@
-const weekdays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+import { t } from "i18next";
+
+const weekdays = [t("sun"), t("mon"), t("tue"), t("wed"), t("thu"), t("fri"), t("sat")];
 const months = [
-  "Jan",
-  "Feb",
-  "Mar",
-  "Apr",
-  "May",
-  "Jun",
-  "Jul",
-  "Aug",
-  "Sep",
-  "Oct",
-  "Nov",
-  "Dec",
+  t("jan"),
+  t("feb"),
+  t("mar"),
+  t("apr"),
+  t("may"),
+  t("jun"),
+  t("jul"),
+  t("aug"),
+  t("oct"),
+  t("nov"),
+  t("dec"),
 ];
+
 //returns formatted time e.g thu, 26 feb
 export const getFormattedTime = (dt: number) => {
   const date = new Date(dt * 1000);
